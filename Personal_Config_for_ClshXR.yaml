@@ -1,0 +1,760 @@
+#---------------------------------------------------#
+## 配置文件需要放置在 $HOME/.config/clash/config.yml
+## 
+## 如果您不知道如何操作，请参阅 SS-Rule-Snippet 的 Wiki：
+## https://github.com/Hackl0us/SS-Rule-Snippet/wiki/clash(X)
+#---------------------------------------------------#
+
+# HTTP 代理端口
+port: 7890
+
+# SOCKS5 代理端口
+socks-port: 7891
+
+# Linux 和 macOS 的 redir 代理端口 (如需使用此功能，请取消注释)
+# redir-port: 7892
+
+# 允许局域网的连接（可用来共享代理）
+allow-lan: true
+# bind-address: "*"
+# 此功能仅在 allow-lan 设置为 true 时生效，支持三种参数：
+# "*"                           绑定所有的 IP 地址
+# 192.168.122.11                绑定一个的 IPv4 地址
+# "[aaaa::a8aa:ff:fe09:57d8]"   绑定一个 IPv6 地址
+
+# 规则模式：Rule（规则） / Global（全局代理）/ Direct（全局直连）
+mode: Rule
+
+# 设置日志输出级别 (默认级别：silent，即不输出任何内容，以避免因日志内容过大而导致程序内存溢出）。
+# 5 个级别：silent / info / warning / error / debug。级别越高日志输出量越大，越倾向于调试，若需要请自行开启。
+log-level: silent
+
+# clash 的 RESTful API
+external-controller: 127.0.0.1:9090
+
+# 您可以将静态网页资源（如 clash-dashboard）放置在一个目录中，clash 将会服务于 `${API}/ui`
+# 参数应填写配置目录的相对路径或绝对路径。
+# external-ui: folder
+
+# RESTful API 的口令 (可选)
+# secret: ""
+
+# 实验性功能
+experimental:
+  ignore-resolve-fail: true # 忽略 DNS 解析失败，默认值为 true
+
+# 本地 SOCKS5 / HTTP(S) 服务认证
+# authentication:
+#  - "user1:pass1"
+#  - "user2:pass2"
+
+# # 实验性功能 hosts, 支持通配符 (例如 *.clash.dev 甚至 *.foo.*.example.com)
+# # 静态的域名 比 通配域名 具有更高的优先级 (foo.example.com 优先于 *.example.com)
+# # 注意: hosts 在 fake-ip 模式下不生效
+# hosts:
+#   '*.clash.dev': 127.0.0.1
+#   'alpha.clash.dev': '::1'
+
+dns:
+  enable: true
+  ipv6: false
+  # listen: 0.0.0.0:53
+  # enhanced-mode: redir-host # 或 fake-ip
+  # # fake-ip-range: 198.18.0.1/16 # 如果你不知道这个参数的作用，请勿修改
+  # fake-ip-filter: # fake-ip 白名单列表
+  #   - '*.lan'
+  #   - localhost.ptlogin2.qq.com
+
+  nameserver:
+    - 1.2.4.8
+    - 114.114.114.114
+    - 223.5.5.5
+    - tls://13800000000.rubyfish.cn:853
+    #- https://13800000000.rubyfish.cn/
+     
+  fallback: # 与 nameserver 内的服务器列表同时发起请求，当规则符合 GEOIP 在 CN 以外时，fallback 列表内的域名服务器生效。
+    - tls://13800000000.rubyfish.cn:853
+    - tls://1.0.0.1:853
+    - tls://dns.google:853
+
+    #- https://13800000000.rubyfish.cn/
+    #- https://cloudflare-dns.com/dns-query
+    #- https://dns.google/dns-query
+
+# 1. clash DNS 请求逻辑：
+#   (1) 当访问一个域名时， nameserver 与 fallback 列表内的所有服务器并发请求，得到域名对应的 IP 地址。
+#   (2) clash 将选取 nameserver 列表内，解析最快的结果。
+#   (3) 若解析结果中，IP 地址属于 国外，那么 clash 将选择 fallback 列表内，解析最快的结果。
+#
+#   因此，我在 nameserver 和 fallback 内都放置了无污染、解析速度较快的国内 DNS 服务器，以达到最快的解析速度。
+#   但是 fallback 列表内服务器会用在解析境外网站，为了结果绝对无污染，我仅保留了支持 DoT/DoH 的两个服务器。
+# 
+# 2. clash DNS 配置注意事项：
+#   (1) 如果您为了确保 DNS 解析结果无污染，请仅保留列表内以 tls:// 或 https:// 开头的 DNS 服务器，但是通常对于国内域名没有必要。
+#   (2) 如果您不在乎可能解析到污染的结果，更加追求速度。请将 nameserver 列表的服务器插入至 fallback 列表内，并移除重复项。
+# 
+# 3. 关于 DNS over HTTPS (DoH) 和 DNS over TLS (DoT) 的选择：
+#   对于两项技术双方各执一词，而且会无休止的争论，各有利弊。各位请根据具体需求自行选择，但是配置文件内默认启用 DoT，因为目前国内没有封锁或管制。
+#   DoH: 以 https:// 开头的 DNS 服务器。拥有更好的伪装性，且几乎不可能被运营商或网络管理封锁，但查询效率和安全性可能略低。
+#   DoT: 以 tls:// 开头的 DNS 服务器。拥有更高的安全性和查询效率，但端口有可能被管制或封锁。
+#   若要了解更多关于 DoH/DoT 相关技术，请自行查阅规范文档。
+
+fallback-filter:
+  geoip: true # 默认
+  ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
+    - 240.0.0.0/4
+
+Proxy:
+# shadowsocks
+# 所支持的加密方式与 go-shadowsocks2 保持一致
+# 支持加密方式： 
+#   aes-128-gcm aes-192-gcm aes-256-gcm
+#   aes-128-cfb aes-192-cfb aes-256-cfb
+#   aes-128-ctr aes-192-ctr aes-256-ctr
+#   rc4-md5 chacha20 chacha20-ietf xchacha20
+#   chacha20-ietf-poly1305 xchacha20-ietf-poly1305
+
+  - {name: "🇭🇰 BGP 香港01 [2]", server: bgp-hk01.fynodes.xyz, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
+  - {name: "🇭🇰 专线 深港01 [1] NF", server: 47.112.106.189, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
+  - {name: "🇭🇰 专线 深港02 [1] NF", server: 47.112.156.92, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
+  - {name: "🇭🇰 专线 深港03 [1] NF", server: 47.112.123.193, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
+  - {name: "🇭🇰 专线 深港04 [1] NF", server: 47.112.131.174, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
+  - {name: "🇭🇰 专线 深港05 [1] NF", server: 47.112.161.220, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
+  - {name: "🇨🇳 中国01 [1]", server: cn1.fynodes.xyz, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
+  - {name: "🇨🇳 中国02 [1]", server: cn2.fynodes.xyz, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
+  - {name: "🇸🇬 BGP 新加坡01 NF [1]", server: bgp-sg01.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 BGP 新加坡02 NF [1]", server: bgp-sg02.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 BGP 新加坡03 NF [1]", server: bgp-sg03.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 BGP 新加坡04 NF [1]", server: bgp-sg04.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 BGP 新加坡05 NF [1]", server: bgp-sg05.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 BGP 香港02 NF [1]", server: bgp-hk02.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 BGP 香港03 NF [1]", server: bgp-hk03.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 BGP 香港04 NF [1]", server: bgp-hk04.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇷🇺 [v2ray] 俄罗斯01 NF [1]", server: rus1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇷🇺 [v2ray] 俄罗斯02 NF [1]", server: rus2.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇷🇺 [v2ray] 俄罗斯03 NF [1]", server: rus3.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇨🇳 [v2ray] 台湾 NF [1]", server: ray.tw1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇨🇳 [v2ray] 台湾01 NF [1]", server: 614.hinet-hua.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇨🇳 [v2ray] 台湾02 NF [0.5]", server: 512.hinet-hua.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇨🇳 [v2ray] 台湾03 NF [1]", server: 715.hinet-hua.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇨🇳 [v2ray] 台湾04 NF [0.5]", server: 514.hinet-hua.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇺🇲 [v2ray] 美国01 NF [1]", server: usa1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇺🇲 [v2ray] 美国02 NF [1]", server: usa2.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇺🇲 [v2ray] 美国03 NF [1]", server: usa3.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇺🇲 [v2ray] 美国1 NF [1]", server: ray.usa1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇺🇲 [v2ray] 美国2 NF [1]", server: ray.usa2.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇺🇲 [v2ray] 美国3 NF [1]", server: ray.usa3.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 [v2ray] 香港01 NF [1]", server: hk1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 [v2ray] 香港02 NF [1]", server: hk2.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 [v2ray] 香港03 NF [1]", server: hk3.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 [v2ray] 香港04 [1] NF", server: hk4.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 [v2ray] 香港05 [1] NF", server: hk5.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 [v2ray] 香港06 NF [1]", server: hk6.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 [v2ray] 香港07 NF [1]", server: ray.hk7.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇭🇰 [v2ray] 香港08 NF [1]", server: ray.hk8.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡01 NF [1]", server: ls-sg01.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡02 NF [1]", server: ls-sg02.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡03 NF [1]", server: ls-sg03.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡04 NF [1]", server: ls-sg04.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡05 NF [1]", server: ls-sg05.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡06 NF [1]", server: ls-sg06.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡07 NF [1]", server: ls-sg07.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡08 NF [1]", server: ls-sg08.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡09 NF [1]", server: ls-sg09.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+  - {name: "🇸🇬 [临时] 新加坡10 NF [1]", server: ls-sg10.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
+
+Proxy Group:
+# url-test 可以自动选择与指定 URL 测速后，延迟最短的服务器
+  - name: Proxy
+    type: select
+    proxies:
+      - 🇭🇰 BGP 香港01 [2]
+      - 🇭🇰 专线 深港01 [1] NF
+      - 🇭🇰 专线 深港02 [1] NF
+      - 🇭🇰 专线 深港03 [1] NF
+      - 🇭🇰 专线 深港04 [1] NF
+      - 🇭🇰 专线 深港05 [1] NF
+      - 🇨🇳 中国01 [1]
+      - 🇨🇳 中国02 [1]
+      - 🇸🇬 BGP 新加坡01 NF [1]
+      - 🇸🇬 BGP 新加坡02 NF [1]
+      - 🇸🇬 BGP 新加坡03 NF [1]
+      - 🇸🇬 BGP 新加坡04 NF [1]
+      - 🇸🇬 BGP 新加坡05 NF [1]
+      - 🇭🇰 BGP 香港02 NF [1]
+      - 🇭🇰 BGP 香港03 NF [1]
+      - 🇭🇰 BGP 香港04 NF [1]
+      - 🇷🇺 [v2ray] 俄罗斯01 NF [1]
+      - 🇷🇺 [v2ray] 俄罗斯02 NF [1]
+      - 🇷🇺 [v2ray] 俄罗斯03 NF [1]
+      - 🇨🇳 [v2ray] 台湾 NF [1]
+      - 🇨🇳 [v2ray] 台湾01 NF [1]
+      - 🇨🇳 [v2ray] 台湾02 NF [0.5]
+      - 🇨🇳 [v2ray] 台湾03 NF [1]
+      - 🇨🇳 [v2ray] 台湾04 NF [0.5]
+      - 🇺🇲 [v2ray] 美国01 NF [1]
+      - 🇺🇲 [v2ray] 美国02 NF [1]
+      - 🇺🇲 [v2ray] 美国03 NF [1]
+      - 🇺🇲 [v2ray] 美国1 NF [1]
+      - 🇺🇲 [v2ray] 美国2 NF [1]
+      - 🇺🇲 [v2ray] 美国3 NF [1]
+      - 🇭🇰 [v2ray] 香港01 NF [1]
+      - 🇭🇰 [v2ray] 香港02 NF [1]
+      - 🇭🇰 [v2ray] 香港03 NF [1]
+      - 🇭🇰 [v2ray] 香港04 [1] NF
+      - 🇭🇰 [v2ray] 香港05 [1] NF
+      - 🇭🇰 [v2ray] 香港06 NF [1]
+      - 🇭🇰 [v2ray] 香港07 NF [1]
+      - 🇭🇰 [v2ray] 香港08 NF [1]
+      - 🇸🇬 [临时] 新加坡01 NF [1]
+      - 🇸🇬 [临时] 新加坡02 NF [1]
+      - 🇸🇬 [临时] 新加坡03 NF [1]
+      - 🇸🇬 [临时] 新加坡04 NF [1]
+      - 🇸🇬 [临时] 新加坡05 NF [1]
+      - 🇸🇬 [临时] 新加坡06 NF [1]
+      - 🇸🇬 [临时] 新加坡07 NF [1]
+      - 🇸🇬 [临时] 新加坡08 NF [1]
+      - 🇸🇬 [临时] 新加坡09 NF [1]
+      - 🇸🇬 [临时] 新加坡10 NF [1]
+  - name: China
+    type: select
+    proxies:
+      - DIRECT
+  - name: Netflix
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 500
+    proxies:
+      - 🇭🇰 专线 深港01 [1] NF
+      - 🇭🇰 专线 深港02 [1] NF
+      - 🇭🇰 专线 深港03 [1] NF
+      - 🇭🇰 专线 深港04 [1] NF
+      - 🇭🇰 专线 深港05 [1] NF
+      - 🇭🇰 BGP 香港02 NF [1]
+      - 🇭🇰 BGP 香港03 NF [1]
+      - 🇭🇰 BGP 香港04 NF [1]
+      - 🇭🇰 [v2ray] 香港01 NF [1]
+      - 🇭🇰 [v2ray] 香港02 NF [1]
+      - 🇭🇰 [v2ray] 香港03 NF [1]
+      - 🇭🇰 [v2ray] 香港04 [1] NF
+      - 🇭🇰 [v2ray] 香港05 [1] NF
+      - 🇭🇰 [v2ray] 香港06 NF [1]
+      - 🇭🇰 [v2ray] 香港07 NF [1]
+      - 🇭🇰 [v2ray] 香港08 NF [1]
+  - name: Other
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+
+Rule:
+# Apple
+  - DOMAIN,safebrowsing.urlsec.qq.com,DIRECT # 如果您并不信任此服务提供商或防止其下载消耗过多带宽资源，可以进入 Safari 设置，关闭 Fraudulent Website Warning 功能，并使用 REJECT 策略。
+  - DOMAIN,safebrowsing.googleapis.com,DIRECT # 如果您并不信任此服务提供商或防止其下载消耗过多带宽资源，可以进入 Safari 设置，关闭 Fraudulent Website Warning 功能，并使用 REJECT 策略。
+  - DOMAIN-SUFFIX,apps.apple.com,Proxy
+  - DOMAIN-SUFFIX,itunes.apple.com,Proxy
+  - DOMAIN-SUFFIX,blobstore.apple.com,Proxy
+  - DOMAIN-SUFFIX,music.apple.com,DIRECT,force-remote-dns
+  - DOMAIN-SUFFIX,cloudd*,DIRECT
+  - DOMAIN-SUFFIX,com.apple.geod*,DIRECT
+  - DOMAIN-SUFFIX,com.apple.Maps,DIRECT
+  - DOMAIN-SUFFIX,icloud.com,DIRECT
+  - DOMAIN-SUFFIX,icloud-content.com,DIRECT
+  - DOMAIN-SUFFIX,me.com,DIRECT
+  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,akadns.net,DIRECT
+  - DOMAIN-SUFFIX,aaplimg.com,DIRECT
+  - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+  - DOMAIN-SUFFIX,apple.com,DIRECT
+  - DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
+  #DOMAIN,e.crashlytics.com,REJECT //注释此选项有助于大多数App开发者分析崩溃信息；如果您拒绝一切崩溃数据统计、搜集，请取消 # 注释。
+
+# Netflix
+
+  - DOMAIN-KEYWORD,netflix,Proxy
+  - DOMAIN-KEYWORD,nflx,Proxy
+  
+# Slack
+  
+  - DOMAIN-SUFFIX,slack-edge.com,Proxy
+  - DOMAIN-SUFFIX,slack.com,Proxy
+  - DOMAIN-SUFFIX,slack-msgs.com,Proxy
+  
+# Porn
+
+  - DOMAIN-SUFFIX,91porn.com,Proxy,force-remote-dns
+  - DOMAIN-SUFFIX,pornhub.com,Proxy
+  - DOMAIN-SUFFIX,t66y.com,Proxy
+  - DOMAIN-SUFFIX,xvideos.com,Proxy
+  - DOMAIN-SUFFIX,kdw019.com,Proxy
+
+# 自定义规则
+  ## 您可以在此处插入您补充的自定义规则（请注意保持缩进）
+
+# 国内网站
+  - DOMAIN-SUFFIX,cn,DIRECT
+  - DOMAIN-KEYWORD,-cn,DIRECT
+
+  - DOMAIN-SUFFIX,126.com,DIRECT
+  - DOMAIN-SUFFIX,126.net,DIRECT
+  - DOMAIN-SUFFIX,127.net,DIRECT
+  - DOMAIN-SUFFIX,163.com,DIRECT
+  - DOMAIN-SUFFIX,360buyimg.com,DIRECT
+  - DOMAIN-SUFFIX,36kr.com,DIRECT
+  - DOMAIN-SUFFIX,acfun.tv,DIRECT
+  - DOMAIN-SUFFIX,air-matters.com,DIRECT
+  - DOMAIN-SUFFIX,aixifan.com,DIRECT
+  - DOMAIN-SUFFIX,akamaized.net,DIRECT
+  - DOMAIN-KEYWORD,alicdn,DIRECT
+  - DOMAIN-KEYWORD,alipay,DIRECT
+  - DOMAIN-KEYWORD,taobao,DIRECT
+  - DOMAIN-SUFFIX,amap.com,DIRECT
+  - DOMAIN-SUFFIX,autonavi.com,DIRECT
+  - DOMAIN-KEYWORD,baidu,DIRECT
+  - DOMAIN-SUFFIX,bdimg.com,DIRECT
+  - DOMAIN-SUFFIX,bdstatic.com,DIRECT
+  - DOMAIN-SUFFIX,bilibili.com,DIRECT
+  - DOMAIN-SUFFIX,caiyunapp.com,DIRECT
+  - DOMAIN-SUFFIX,clouddn.com,DIRECT
+  - DOMAIN-SUFFIX,cnbeta.com,DIRECT
+  - DOMAIN-SUFFIX,cnbetacdn.com,DIRECT
+  - DOMAIN-SUFFIX,cootekservice.com,DIRECT
+  - DOMAIN-SUFFIX,csdn.net,DIRECT
+  - DOMAIN-SUFFIX,ctrip.com,DIRECT
+  - DOMAIN-SUFFIX,dgtle.com,DIRECT
+  - DOMAIN-SUFFIX,dianping.com,DIRECT
+  - DOMAIN-SUFFIX,douban.com,DIRECT
+  - DOMAIN-SUFFIX,doubanio.com,DIRECT
+  - DOMAIN-SUFFIX,duokan.com,DIRECT
+  - DOMAIN-SUFFIX,easou.com,DIRECT
+  - DOMAIN-SUFFIX,ele.me,DIRECT
+  - DOMAIN-SUFFIX,feng.com,DIRECT
+  - DOMAIN-SUFFIX,fir.im,DIRECT
+  - DOMAIN-SUFFIX,frdic.com,DIRECT
+  - DOMAIN-SUFFIX,g-cores.com,DIRECT
+  - DOMAIN-SUFFIX,godic.net,DIRECT
+  - DOMAIN-SUFFIX,gtimg.com,DIRECT
+  - DOMAIN,cdn.hockeyapp.net,DIRECT
+  - DOMAIN-SUFFIX,hongxiu.com,DIRECT
+  - DOMAIN-SUFFIX,hxcdn.net,DIRECT
+  - DOMAIN-SUFFIX,iciba.com,DIRECT
+  - DOMAIN-SUFFIX,ifeng.com,DIRECT
+  - DOMAIN-SUFFIX,ifengimg.com,DIRECT
+  - DOMAIN-SUFFIX,ipip.net,DIRECT
+  - DOMAIN-SUFFIX,iqiyi.com,DIRECT
+  - DOMAIN-SUFFIX,jd.com,DIRECT
+  - DOMAIN-SUFFIX,jianshu.com,DIRECT
+  - DOMAIN-SUFFIX,knewone.com,DIRECT
+  - DOMAIN-SUFFIX,le.com,DIRECT
+  - DOMAIN-SUFFIX,lecloud.com,DIRECT
+  - DOMAIN-SUFFIX,lemicp.com,DIRECT
+  - DOMAIN-SUFFIX,licdn.com,DIRECT
+  - DOMAIN-SUFFIX,linkedin.com,DIRECT
+  - DOMAIN-SUFFIX,luoo.net,DIRECT
+  - DOMAIN-SUFFIX,meituan.com,DIRECT
+  - DOMAIN-SUFFIX,meituan.net,DIRECT
+  - DOMAIN-SUFFIX,mi.com,DIRECT
+  - DOMAIN-SUFFIX,miaopai.com,DIRECT
+  - DOMAIN-SUFFIX,microsoft.com,DIRECT
+  - DOMAIN-SUFFIX,microsoftonline.com,DIRECT
+  - DOMAIN-SUFFIX,miui.com,DIRECT
+  - DOMAIN-SUFFIX,miwifi.com,DIRECT
+  - DOMAIN-SUFFIX,mob.com,DIRECT
+  - DOMAIN-SUFFIX,netease.com,DIRECT
+  - DOMAIN-SUFFIX,office.com,DIRECT
+  - DOMAIN-SUFFIX,office365.com,DIRECT
+  - DOMAIN-KEYWORD,officecdn,DIRECT
+  - DOMAIN-SUFFIX,oschina.net,DIRECT
+  - DOMAIN-SUFFIX,ppsimg.com,DIRECT
+  - DOMAIN-SUFFIX,pstatp.com,DIRECT
+  - DOMAIN-SUFFIX,qcloud.com,DIRECT
+  - DOMAIN-SUFFIX,qdaily.com,DIRECT
+  - DOMAIN-SUFFIX,qdmm.com,DIRECT
+  - DOMAIN-SUFFIX,qhimg.com,DIRECT
+  - DOMAIN-SUFFIX,qhres.com,DIRECT
+  - DOMAIN-SUFFIX,qidian.com,DIRECT
+  - DOMAIN-SUFFIX,qihucdn.com,DIRECT
+  - DOMAIN-SUFFIX,qiniu.com,DIRECT
+  - DOMAIN-SUFFIX,qiniucdn.com,DIRECT
+  - DOMAIN-SUFFIX,qiyipic.com,DIRECT
+  - DOMAIN-SUFFIX,qq.com,DIRECT
+  - DOMAIN-SUFFIX,qqurl.com,DIRECT
+  - DOMAIN-SUFFIX,rarbg.to,DIRECT
+  - DOMAIN-SUFFIX,ruguoapp.com,DIRECT
+  - DOMAIN-SUFFIX,segmentfault.com,DIRECT
+  - DOMAIN-SUFFIX,sinaapp.com,DIRECT
+  - DOMAIN-SUFFIX,smzdm.com,DIRECT
+  - DOMAIN-SUFFIX,snapdrop.net,DIRECT
+  - DOMAIN-SUFFIX,sogou.com,DIRECT
+  - DOMAIN-SUFFIX,sogoucdn.com,DIRECT
+  - DOMAIN-SUFFIX,sohu.com,DIRECT
+  - DOMAIN-SUFFIX,soku.com,DIRECT
+  - DOMAIN-SUFFIX,speedtest.net,DIRECT
+  - DOMAIN-SUFFIX,sspai.com,DIRECT
+  - DOMAIN-SUFFIX,suning.com,DIRECT
+  - DOMAIN-SUFFIX,taobao.com,DIRECT
+  - DOMAIN-SUFFIX,tencent.com,DIRECT
+  - DOMAIN-SUFFIX,tenpay.com,DIRECT
+  - DOMAIN-SUFFIX,tianyancha.com,DIRECT
+  - DOMAIN-SUFFIX,tmall.com,DIRECT
+  - DOMAIN-SUFFIX,tudou.com,DIRECT
+  - DOMAIN-SUFFIX,umetrip.com,DIRECT
+  - DOMAIN-SUFFIX,upaiyun.com,DIRECT
+  - DOMAIN-SUFFIX,upyun.com,DIRECT
+  - DOMAIN-SUFFIX,veryzhun.com,DIRECT
+  - DOMAIN-SUFFIX,weather.com,DIRECT
+  - DOMAIN-SUFFIX,weibo.com,DIRECT
+  - DOMAIN-SUFFIX,xiami.com,DIRECT
+  - DOMAIN-SUFFIX,xiami.net,DIRECT
+  - DOMAIN-SUFFIX,xiaomicp.com,DIRECT
+  - DOMAIN-SUFFIX,ximalaya.com,DIRECT
+  - DOMAIN-SUFFIX,xmcdn.com,DIRECT
+  - DOMAIN-SUFFIX,xunlei.com,DIRECT
+  - DOMAIN-SUFFIX,yhd.com,DIRECT
+  - DOMAIN-SUFFIX,yihaodianimg.com,DIRECT
+  - DOMAIN-SUFFIX,yinxiang.com,DIRECT
+  - DOMAIN-SUFFIX,ykimg.com,DIRECT
+  - DOMAIN-SUFFIX,youdao.com,DIRECT
+  - DOMAIN-SUFFIX,youku.com,DIRECT
+  - DOMAIN-SUFFIX,zealer.com,DIRECT
+  - DOMAIN-SUFFIX,zhihu.com,DIRECT
+  - DOMAIN-SUFFIX,zhimg.com,DIRECT
+  - DOMAIN-SUFFIX,zimuzu.tv,DIRECT
+  - DOMAIN-SUFFIX,zoho.com,DIRECT
+
+# 抗 DNS 污染 
+  - DOMAIN-KEYWORD,amazon,Proxy
+  - DOMAIN-KEYWORD,google,Proxy
+  - DOMAIN-KEYWORD,gmail,Proxy
+  - DOMAIN-KEYWORD,youtube,Proxy
+  - DOMAIN-KEYWORD,facebook,Proxy
+  - DOMAIN-SUFFIX,fb.me,Proxy
+  - DOMAIN-SUFFIX,fbcdn.net,Proxy
+  - DOMAIN-KEYWORD,twitter,Proxy
+  - DOMAIN-KEYWORD,instagram,Proxy
+  - DOMAIN-KEYWORD,dropbox,Proxy
+  - DOMAIN-SUFFIX,twimg.com,Proxy
+  - DOMAIN-KEYWORD,blogspot,Proxy
+  - DOMAIN-SUFFIX,youtu.be,Proxy
+  - DOMAIN-KEYWORD,whatsapp,Proxy
+
+# 常见广告域名屏蔽
+  - DOMAIN-KEYWORD,admarvel,REJECT
+  - DOMAIN-KEYWORD,admaster,REJECT
+  - DOMAIN-KEYWORD,adsage,REJECT
+  - DOMAIN-KEYWORD,adsmogo,REJECT
+  - DOMAIN-KEYWORD,adsrvmedia,REJECT
+  - DOMAIN-KEYWORD,adwords,REJECT
+  - DOMAIN-KEYWORD,adservice,REJECT
+  - DOMAIN-KEYWORD,domob,REJECT
+  - DOMAIN-KEYWORD,duomeng,REJECT
+  - DOMAIN-KEYWORD,dwtrack,REJECT
+  - DOMAIN-KEYWORD,guanggao,REJECT
+  - DOMAIN-KEYWORD,lianmeng,REJECT
+  - DOMAIN-SUFFIX,mmstat.com,REJECT
+  - DOMAIN-KEYWORD,omgmta,REJECT
+  - DOMAIN-KEYWORD,openx,REJECT
+  - DOMAIN-KEYWORD,partnerad,REJECT
+  - DOMAIN-KEYWORD,pingfore,REJECT
+  - DOMAIN-KEYWORD,supersonicads,REJECT
+  - DOMAIN-KEYWORD,uedas,REJECT
+  - DOMAIN-KEYWORD,umeng,REJECT
+  - DOMAIN-KEYWORD,usage,REJECT
+  - DOMAIN-KEYWORD,wlmonitor,REJECT
+  - DOMAIN-KEYWORD,zjtoolbar,REJECT
+
+# 国外网站
+  - DOMAIN-SUFFIX,9to5mac.com,Proxy
+  - DOMAIN-SUFFIX,abpchina.org,Proxy
+  - DOMAIN-SUFFIX,adblockplus.org,Proxy
+  - DOMAIN-SUFFIX,adobe.com,Proxy
+  - DOMAIN-SUFFIX,alfredapp.com,Proxy
+  - DOMAIN-SUFFIX,amplitude.com,Proxy
+  - DOMAIN-SUFFIX,ampproject.org,Proxy
+  - DOMAIN-SUFFIX,android.com,Proxy
+  - DOMAIN-SUFFIX,angularjs.org,Proxy
+  - DOMAIN-SUFFIX,aolcdn.com,Proxy
+  - DOMAIN-SUFFIX,apkpure.com,Proxy
+  - DOMAIN-SUFFIX,appledaily.com,Proxy
+  - DOMAIN-SUFFIX,appshopper.com,Proxy
+  - DOMAIN-SUFFIX,appspot.com,Proxy
+  - DOMAIN-SUFFIX,arcgis.com,Proxy
+  - DOMAIN-SUFFIX,archive.org,Proxy
+  - DOMAIN-SUFFIX,armorgames.com,Proxy
+  - DOMAIN-SUFFIX,aspnetcdn.com,Proxy
+  - DOMAIN-SUFFIX,att.com,Proxy
+  - DOMAIN-SUFFIX,awsstatic.com,Proxy
+  - DOMAIN-SUFFIX,azureedge.net,Proxy
+  - DOMAIN-SUFFIX,azurewebsites.net,Proxy
+  - DOMAIN-SUFFIX,bing.com,Proxy
+  - DOMAIN-SUFFIX,bintray.com,Proxy
+  - DOMAIN-SUFFIX,bit.com,Proxy
+  - DOMAIN-SUFFIX,bit.ly,Proxy
+  - DOMAIN-SUFFIX,bitbucket.org,Proxy
+  - DOMAIN-SUFFIX,bjango.com,Proxy
+  - DOMAIN-SUFFIX,bkrtx.com,Proxy
+  - DOMAIN-SUFFIX,blog.com,Proxy
+  - DOMAIN-SUFFIX,blogcdn.com,Proxy
+  - DOMAIN-SUFFIX,blogger.com,Proxy
+  - DOMAIN-SUFFIX,blogsmithmedia.com,Proxy
+  - DOMAIN-SUFFIX,blogspot.com,Proxy
+  - DOMAIN-SUFFIX,blogspot.hk,Proxy
+  - DOMAIN-SUFFIX,bloomberg.com,Proxy
+  - DOMAIN-SUFFIX,box.com,Proxy
+  - DOMAIN-SUFFIX,box.net,Proxy
+  - DOMAIN-SUFFIX,cachefly.net,Proxy
+  - DOMAIN-SUFFIX,chromium.org,Proxy
+  - DOMAIN-SUFFIX,cl.ly,Proxy
+  - DOMAIN-SUFFIX,cloudflare.com,Proxy
+  - DOMAIN-SUFFIX,cloudfront.net,Proxy
+  - DOMAIN-SUFFIX,cloudmagic.com,Proxy
+  - DOMAIN-SUFFIX,cmail19.com,Proxy
+  - DOMAIN-SUFFIX,cnet.com,Proxy
+  - DOMAIN-SUFFIX,cocoapods.org,Proxy
+  - DOMAIN-SUFFIX,comodoca.com,Proxy
+  - DOMAIN-SUFFIX,crashlytics.com,Proxy
+  - DOMAIN-SUFFIX,culturedcode.com,Proxy
+  - DOMAIN-SUFFIX,d.pr,Proxy
+  - DOMAIN-SUFFIX,danilo.to,Proxy
+  - DOMAIN-SUFFIX,dayone.me,Proxy
+  - DOMAIN-SUFFIX,db.tt,Proxy
+  - DOMAIN-SUFFIX,deskconnect.com,Proxy
+  - DOMAIN-SUFFIX,disq.us,Proxy
+  - DOMAIN-SUFFIX,disqus.com,Proxy
+  - DOMAIN-SUFFIX,disquscdn.com,Proxy
+  - DOMAIN-SUFFIX,dnsimple.com,Proxy
+  - DOMAIN-SUFFIX,docker.com,Proxy
+  - DOMAIN-SUFFIX,dribbble.com,Proxy
+  - DOMAIN-SUFFIX,droplr.com,Proxy
+  - DOMAIN-SUFFIX,duckduckgo.com,Proxy
+  - DOMAIN-SUFFIX,dueapp.com,Proxy
+  - DOMAIN-SUFFIX,dytt8.net,Proxy
+  - DOMAIN-SUFFIX,edgecastcdn.net,Proxy
+  - DOMAIN-SUFFIX,edgekey.net,Proxy
+  - DOMAIN-SUFFIX,edgesuite.net,Proxy
+  - DOMAIN-SUFFIX,engadget.com,Proxy
+  - DOMAIN-SUFFIX,entrust.net,Proxy
+  - DOMAIN-SUFFIX,eurekavpt.com,Proxy
+  - DOMAIN-SUFFIX,evernote.com,Proxy
+  - DOMAIN-SUFFIX,fabric.io,Proxy
+  - DOMAIN-SUFFIX,fast.com,Proxy
+  - DOMAIN-SUFFIX,fastly.net,Proxy
+  - DOMAIN-SUFFIX,fc2.com,Proxy
+  - DOMAIN-SUFFIX,feedburner.com,Proxy
+  - DOMAIN-SUFFIX,feedly.com,Proxy
+  - DOMAIN-SUFFIX,feedsportal.com,Proxy
+  - DOMAIN-SUFFIX,fiftythree.com,Proxy
+  - DOMAIN-SUFFIX,firebaseio.com,Proxy
+  - DOMAIN-SUFFIX,flexibits.com,Proxy
+  - DOMAIN-SUFFIX,flickr.com,Proxy
+  - DOMAIN-SUFFIX,flipboard.com,Proxy
+  - DOMAIN-SUFFIX,g.co,Proxy
+  - DOMAIN-SUFFIX,gabia.net,Proxy
+  - DOMAIN-SUFFIX,geni.us,Proxy
+  - DOMAIN-SUFFIX,gfx.ms,Proxy
+  - DOMAIN-SUFFIX,ggpht.com,Proxy
+  - DOMAIN-SUFFIX,ghostnoteapp.com,Proxy
+  - DOMAIN-SUFFIX,git.io,Proxy
+  - DOMAIN-KEYWORD,github,Proxy
+  - DOMAIN-SUFFIX,globalsign.com,Proxy
+  - DOMAIN-SUFFIX,gmodules.com,Proxy
+  - DOMAIN-SUFFIX,godaddy.com,Proxy
+  - DOMAIN-SUFFIX,golang.org,Proxy
+  - DOMAIN-SUFFIX,gongm.in,Proxy
+  - DOMAIN-SUFFIX,goo.gl,Proxy
+  - DOMAIN-SUFFIX,goodreaders.com,Proxy
+  - DOMAIN-SUFFIX,goodreads.com,Proxy
+  - DOMAIN-SUFFIX,gravatar.com,Proxy
+  - DOMAIN-SUFFIX,gstatic.com,Proxy
+  - DOMAIN-SUFFIX,gvt0.com,Proxy
+  - DOMAIN-SUFFIX,hockeyapp.net,Proxy
+  - DOMAIN-SUFFIX,hotmail.com,Proxy
+  - DOMAIN-SUFFIX,icons8.com,Proxy
+  - DOMAIN-SUFFIX,ifixit.com,Proxy
+  - DOMAIN-SUFFIX,ift.tt,Proxy
+  - DOMAIN-SUFFIX,ifttt.com,Proxy
+  - DOMAIN-SUFFIX,iherb.com,Proxy
+  - DOMAIN-SUFFIX,imageshack.us,Proxy
+  - DOMAIN-SUFFIX,img.ly,Proxy
+  - DOMAIN-SUFFIX,imgur.com,Proxy
+  - DOMAIN-SUFFIX,imore.com,Proxy
+  - DOMAIN-SUFFIX,instapaper.com,Proxy
+  - DOMAIN-SUFFIX,ipn.li,Proxy
+  - DOMAIN-SUFFIX,is.gd,Proxy
+  - DOMAIN-SUFFIX,issuu.com,Proxy
+  - DOMAIN-SUFFIX,itgonglun.com,Proxy
+  - DOMAIN-SUFFIX,itun.es,Proxy
+  - DOMAIN-SUFFIX,ixquick.com,Proxy
+  - DOMAIN-SUFFIX,j.mp,Proxy
+  - DOMAIN-SUFFIX,js.revsci.net,Proxy
+  - DOMAIN-SUFFIX,jshint.com,Proxy
+  - DOMAIN-SUFFIX,jtvnw.net,Proxy
+  - DOMAIN-SUFFIX,justgetflux.com,Proxy
+  - DOMAIN-SUFFIX,kat.cr,Proxy
+  - DOMAIN-SUFFIX,klip.me,Proxy
+  - DOMAIN-SUFFIX,libsyn.com,Proxy
+  - DOMAIN-SUFFIX,linode.com,Proxy
+  - DOMAIN-SUFFIX,lithium.com,Proxy
+  - DOMAIN-SUFFIX,littlehj.com,Proxy
+  - DOMAIN-SUFFIX,live.com,Proxy
+  - DOMAIN-SUFFIX,live.net,Proxy
+  - DOMAIN-SUFFIX,livefilestore.com,Proxy
+  - DOMAIN-SUFFIX,llnwd.net,Proxy
+  - DOMAIN-SUFFIX,macid.co,Proxy
+  - DOMAIN-SUFFIX,macromedia.com,Proxy
+  - DOMAIN-SUFFIX,macrumors.com,Proxy
+  - DOMAIN-SUFFIX,mashable.com,Proxy
+  - DOMAIN-SUFFIX,mathjax.org,Proxy
+  - DOMAIN-SUFFIX,medium.com,Proxy
+  - DOMAIN-SUFFIX,mega.co.nz,Proxy
+  - DOMAIN-SUFFIX,mega.nz,Proxy
+  - DOMAIN-SUFFIX,megaupload.com,Proxy
+  - DOMAIN-SUFFIX,microsofttranslator.com,Proxy
+  - DOMAIN-SUFFIX,mindnode.com,Proxy
+  - DOMAIN-SUFFIX,mobile01.com,Proxy
+  - DOMAIN-SUFFIX,modmyi.com,Proxy
+  - DOMAIN-SUFFIX,msedge.net,Proxy
+  - DOMAIN-SUFFIX,myfontastic.com,Proxy
+  - DOMAIN-SUFFIX,name.com,Proxy
+  - DOMAIN-SUFFIX,nextmedia.com,Proxy
+  - DOMAIN-SUFFIX,nsstatic.net,Proxy
+  - DOMAIN-SUFFIX,nssurge.com,Proxy
+  - DOMAIN-SUFFIX,nyt.com,Proxy
+  - DOMAIN-SUFFIX,nytimes.com,Proxy
+  - DOMAIN-SUFFIX,omnigroup.com,Proxy
+  - DOMAIN-SUFFIX,onedrive.com,Proxy
+  - DOMAIN-SUFFIX,onenote.com,Proxy
+  - DOMAIN-SUFFIX,ooyala.com,Proxy
+  - DOMAIN-SUFFIX,openvpn.net,Proxy
+  - DOMAIN-SUFFIX,openwrt.org,Proxy
+  - DOMAIN-SUFFIX,orkut.com,Proxy
+  - DOMAIN-SUFFIX,osxdaily.com,Proxy
+  - DOMAIN-SUFFIX,outlook.com,Proxy
+  - DOMAIN-SUFFIX,ow.ly,Proxy
+  - DOMAIN-SUFFIX,paddleapi.com,Proxy
+  - DOMAIN-SUFFIX,parallels.com,Proxy
+  - DOMAIN-SUFFIX,parse.com,Proxy
+  - DOMAIN-SUFFIX,pdfexpert.com,Proxy
+  - DOMAIN-SUFFIX,periscope.tv,Proxy
+  - DOMAIN-SUFFIX,pinboard.in,Proxy
+  - DOMAIN-SUFFIX,pinterest.com,Proxy
+  - DOMAIN-SUFFIX,pixelmator.com,Proxy
+  - DOMAIN-SUFFIX,pixiv.net,Proxy
+  - DOMAIN-SUFFIX,playpcesor.com,Proxy
+  - DOMAIN-SUFFIX,playstation.com,Proxy
+  - DOMAIN-SUFFIX,playstation.com.hk,Proxy
+  - DOMAIN-SUFFIX,playstation.net,Proxy
+  - DOMAIN-SUFFIX,playstationnetwork.com,Proxy
+  - DOMAIN-SUFFIX,pushwoosh.com,Proxy
+  - DOMAIN-SUFFIX,rime.im,Proxy
+  - DOMAIN-SUFFIX,servebom.com,Proxy
+  - DOMAIN-SUFFIX,sfx.ms,Proxy
+  - DOMAIN-SUFFIX,shadowsocks.org,Proxy
+  - DOMAIN-SUFFIX,sharethis.com,Proxy
+  - DOMAIN-SUFFIX,shazam.com,Proxy
+  - DOMAIN-SUFFIX,skype.com,Proxy
+  - DOMAIN-SUFFIX,smartdnsProxy.com,Proxy
+  - DOMAIN-SUFFIX,smartmailcloud.com,Proxy
+  - DOMAIN-SUFFIX,sndcdn.com,Proxy
+  - DOMAIN-SUFFIX,sony.com,Proxy
+  - DOMAIN-SUFFIX,soundcloud.com,Proxy
+  - DOMAIN-SUFFIX,sourceforge.net,Proxy
+  - DOMAIN-SUFFIX,spotify.com,Proxy
+  - DOMAIN-SUFFIX,squarespace.com,Proxy
+  - DOMAIN-SUFFIX,sstatic.net,Proxy
+  - DOMAIN-SUFFIX,st.luluku.pw,Proxy
+  - DOMAIN-SUFFIX,stackoverflow.com,Proxy
+  - DOMAIN-SUFFIX,startpage.com,Proxy
+  - DOMAIN-SUFFIX,staticflickr.com,Proxy
+  - DOMAIN-SUFFIX,steamcommunity.com,Proxy
+  - DOMAIN-SUFFIX,symauth.com,Proxy
+  - DOMAIN-SUFFIX,symcb.com,Proxy
+  - DOMAIN-SUFFIX,symcd.com,Proxy
+  - DOMAIN-SUFFIX,tapbots.com,Proxy
+  - DOMAIN-SUFFIX,tapbots.net,Proxy
+  - DOMAIN-SUFFIX,tdesktop.com,Proxy
+  - DOMAIN-SUFFIX,techcrunch.com,Proxy
+  - DOMAIN-SUFFIX,techsmith.com,Proxy
+  - DOMAIN-SUFFIX,thepiratebay.org,Proxy
+  - DOMAIN-SUFFIX,theverge.com,Proxy
+  - DOMAIN-SUFFIX,time.com,Proxy
+  - DOMAIN-SUFFIX,timeinc.net,Proxy
+  - DOMAIN-SUFFIX,tiny.cc,Proxy
+  - DOMAIN-SUFFIX,tinypic.com,Proxy
+  - DOMAIN-SUFFIX,tmblr.co,Proxy
+  - DOMAIN-SUFFIX,todoist.com,Proxy
+  - DOMAIN-SUFFIX,trello.com,Proxy
+  - DOMAIN-SUFFIX,trustasiassl.com,Proxy
+  - DOMAIN-SUFFIX,tumblr.co,Proxy
+  - DOMAIN-SUFFIX,tumblr.com,Proxy
+  - DOMAIN-SUFFIX,tweetdeck.com,Proxy
+  - DOMAIN-SUFFIX,tweetmarker.net,Proxy
+  - DOMAIN-SUFFIX,twitch.tv,Proxy
+  - DOMAIN-SUFFIX,txmblr.com,Proxy
+  - DOMAIN-SUFFIX,typekit.net,Proxy
+  - DOMAIN-SUFFIX,ubertags.com,Proxy
+  - DOMAIN-SUFFIX,ublock.org,Proxy
+  - DOMAIN-SUFFIX,ubnt.com,Proxy
+  - DOMAIN-SUFFIX,ulyssesapp.com,Proxy
+  - DOMAIN-SUFFIX,urchin.com,Proxy
+  - DOMAIN-SUFFIX,usertrust.com,Proxy
+  - DOMAIN-SUFFIX,v.gd,Proxy
+  - DOMAIN-SUFFIX,v2ex.com,Proxy
+  - DOMAIN-SUFFIX,vimeo.com,Proxy
+  - DOMAIN-SUFFIX,vimeocdn.com,Proxy
+  - DOMAIN-SUFFIX,vine.co,Proxy
+  - DOMAIN-SUFFIX,vivaldi.com,Proxy
+  - DOMAIN-SUFFIX,vox-cdn.com,Proxy
+  - DOMAIN-SUFFIX,vsco.co,Proxy
+  - DOMAIN-SUFFIX,vultr.com,Proxy
+  - DOMAIN-SUFFIX,w.org,Proxy
+  - DOMAIN-SUFFIX,w3schools.com,Proxy
+  - DOMAIN-SUFFIX,webtype.com,Proxy
+  - DOMAIN-SUFFIX,wikiwand.com,Proxy
+  - DOMAIN-SUFFIX,wikileaks.org,Proxy
+  - DOMAIN-SUFFIX,wikimedia.org,Proxy
+  - DOMAIN-SUFFIX,wikipedia.com,Proxy
+  - DOMAIN-SUFFIX,wikipedia.org,Proxy
+  - DOMAIN-SUFFIX,windows.com,Proxy
+  - DOMAIN-SUFFIX,windows.net,Proxy
+  - DOMAIN-SUFFIX,wire.com,Proxy
+  - DOMAIN-SUFFIX,wordpress.com,Proxy
+  - DOMAIN-SUFFIX,workflowy.com,Proxy
+  - DOMAIN-SUFFIX,wp.com,Proxy
+  - DOMAIN-SUFFIX,wsj.com,Proxy
+  - DOMAIN-SUFFIX,wsj.net,Proxy
+  - DOMAIN-SUFFIX,xda-developers.com,Proxy
+  - DOMAIN-SUFFIX,xeeno.com,Proxy
+  - DOMAIN-SUFFIX,xiti.com,Proxy
+  - DOMAIN-SUFFIX,yahoo.com,Proxy
+  - DOMAIN-SUFFIX,yimg.com,Proxy
+  - DOMAIN-SUFFIX,ying.com,Proxy
+  - DOMAIN-SUFFIX,yoyo.org,Proxy
+  - DOMAIN-SUFFIX,ytimg.com,Proxy
+
+# Telegram
+  - DOMAIN-SUFFIX,telegra.ph,Proxy
+  - DOMAIN-SUFFIX,telegram.org,Proxy
+
+  - IP-CIDR,91.108.4.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.8.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.12.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.16.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.56.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.160.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.164.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.168.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.172.0/22,Proxy,no-resolve
+
+# LAN
+  - DOMAIN-SUFFIX,local,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,17.0.0.0/8,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
+
+# 最终规则
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxy
