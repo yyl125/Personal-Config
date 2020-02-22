@@ -114,108 +114,12 @@ Proxy:
 #   rc4-md5 chacha20 chacha20-ietf xchacha20
 #   chacha20-ietf-poly1305 xchacha20-ietf-poly1305
 
-  - {name: "🇭🇰 BGP 香港01 [2]", server: bgp-hk01.fynodes.xyz, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
-  - {name: "🇭🇰 专线 深港01 [1] NF", server: 47.112.106.189, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
-  - {name: "🇭🇰 专线 深港02 [1] NF", server: 47.112.156.92, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
-  - {name: "🇭🇰 专线 深港03 [1] NF", server: 47.112.123.193, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
-  - {name: "🇭🇰 专线 深港04 [1] NF", server: 47.112.131.174, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
-  - {name: "🇭🇰 专线 深港05 [1] NF", server: 47.112.161.220, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
-  - {name: "🇨🇳 中国01 [1]", server: cn1.fynodes.xyz, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
-  - {name: "🇨🇳 中国02 [1]", server: cn2.fynodes.xyz, port: 50428, type: ss, cipher: chacha20-ietf, password: mk60tM}
-  - {name: "🇸🇬 BGP 新加坡01 NF [1]", server: bgp-sg01.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 BGP 新加坡02 NF [1]", server: bgp-sg02.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 BGP 新加坡03 NF [1]", server: bgp-sg03.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 BGP 新加坡04 NF [1]", server: bgp-sg04.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 BGP 新加坡05 NF [1]", server: bgp-sg05.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 BGP 香港02 NF [1]", server: bgp-hk02.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 BGP 香港03 NF [1]", server: bgp-hk03.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 BGP 香港04 NF [1]", server: bgp-hk04.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇷🇺 [v2ray] 俄罗斯01 NF [1]", server: rus1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇷🇺 [v2ray] 俄罗斯02 NF [1]", server: rus2.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇷🇺 [v2ray] 俄罗斯03 NF [1]", server: rus3.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇨🇳 [v2ray] 台湾 NF [1]", server: ray.tw1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇨🇳 [v2ray] 台湾01 NF [1]", server: 614.hinet-hua.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇨🇳 [v2ray] 台湾02 NF [0.5]", server: 512.hinet-hua.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇨🇳 [v2ray] 台湾03 NF [1]", server: 715.hinet-hua.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇨🇳 [v2ray] 台湾04 NF [0.5]", server: 514.hinet-hua.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇺🇲 [v2ray] 美国01 NF [1]", server: usa1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇺🇲 [v2ray] 美国02 NF [1]", server: usa2.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇺🇲 [v2ray] 美国03 NF [1]", server: usa3.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇺🇲 [v2ray] 美国1 NF [1]", server: ray.usa1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇺🇲 [v2ray] 美国2 NF [1]", server: ray.usa2.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇺🇲 [v2ray] 美国3 NF [1]", server: ray.usa3.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 [v2ray] 香港01 NF [1]", server: hk1.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 [v2ray] 香港02 NF [1]", server: hk2.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 [v2ray] 香港03 NF [1]", server: hk3.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 [v2ray] 香港04 [1] NF", server: hk4.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 [v2ray] 香港05 [1] NF", server: hk5.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 [v2ray] 香港06 NF [1]", server: hk6.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 [v2ray] 香港07 NF [1]", server: ray.hk7.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇭🇰 [v2ray] 香港08 NF [1]", server: ray.hk8.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡01 NF [1]", server: ls-sg01.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡02 NF [1]", server: ls-sg02.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡03 NF [1]", server: ls-sg03.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡04 NF [1]", server: ls-sg04.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡05 NF [1]", server: ls-sg05.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡06 NF [1]", server: ls-sg06.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡07 NF [1]", server: ls-sg07.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡08 NF [1]", server: ls-sg08.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡09 NF [1]", server: ls-sg09.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-  - {name: "🇸🇬 [临时] 新加坡10 NF [1]", server: ls-sg10.fynodes.xyz, port: 51201, type: vmess, uuid: c8a837df-b9b4-3144-b79c-802f86cd3b4b, alterId: 2, cipher: auto, tls: false}
-
 Proxy Group:
 # url-test 可以自动选择与指定 URL 测速后，延迟最短的服务器
   - name: Proxy
     type: select
     proxies:
-      - 🇭🇰 BGP 香港01 [2]
-      - 🇭🇰 专线 深港01 [1] NF
-      - 🇭🇰 专线 深港02 [1] NF
-      - 🇭🇰 专线 深港03 [1] NF
-      - 🇭🇰 专线 深港04 [1] NF
-      - 🇭🇰 专线 深港05 [1] NF
-      - 🇨🇳 中国01 [1]
-      - 🇨🇳 中国02 [1]
-      - 🇸🇬 BGP 新加坡01 NF [1]
-      - 🇸🇬 BGP 新加坡02 NF [1]
-      - 🇸🇬 BGP 新加坡03 NF [1]
-      - 🇸🇬 BGP 新加坡04 NF [1]
-      - 🇸🇬 BGP 新加坡05 NF [1]
-      - 🇭🇰 BGP 香港02 NF [1]
-      - 🇭🇰 BGP 香港03 NF [1]
-      - 🇭🇰 BGP 香港04 NF [1]
-      - 🇷🇺 [v2ray] 俄罗斯01 NF [1]
-      - 🇷🇺 [v2ray] 俄罗斯02 NF [1]
-      - 🇷🇺 [v2ray] 俄罗斯03 NF [1]
-      - 🇨🇳 [v2ray] 台湾 NF [1]
-      - 🇨🇳 [v2ray] 台湾01 NF [1]
-      - 🇨🇳 [v2ray] 台湾02 NF [0.5]
-      - 🇨🇳 [v2ray] 台湾03 NF [1]
-      - 🇨🇳 [v2ray] 台湾04 NF [0.5]
-      - 🇺🇲 [v2ray] 美国01 NF [1]
-      - 🇺🇲 [v2ray] 美国02 NF [1]
-      - 🇺🇲 [v2ray] 美国03 NF [1]
-      - 🇺🇲 [v2ray] 美国1 NF [1]
-      - 🇺🇲 [v2ray] 美国2 NF [1]
-      - 🇺🇲 [v2ray] 美国3 NF [1]
-      - 🇭🇰 [v2ray] 香港01 NF [1]
-      - 🇭🇰 [v2ray] 香港02 NF [1]
-      - 🇭🇰 [v2ray] 香港03 NF [1]
-      - 🇭🇰 [v2ray] 香港04 [1] NF
-      - 🇭🇰 [v2ray] 香港05 [1] NF
-      - 🇭🇰 [v2ray] 香港06 NF [1]
-      - 🇭🇰 [v2ray] 香港07 NF [1]
-      - 🇭🇰 [v2ray] 香港08 NF [1]
-      - 🇸🇬 [临时] 新加坡01 NF [1]
-      - 🇸🇬 [临时] 新加坡02 NF [1]
-      - 🇸🇬 [临时] 新加坡03 NF [1]
-      - 🇸🇬 [临时] 新加坡04 NF [1]
-      - 🇸🇬 [临时] 新加坡05 NF [1]
-      - 🇸🇬 [临时] 新加坡06 NF [1]
-      - 🇸🇬 [临时] 新加坡07 NF [1]
-      - 🇸🇬 [临时] 新加坡08 NF [1]
-      - 🇸🇬 [临时] 新加坡09 NF [1]
-      - 🇸🇬 [临时] 新加坡10 NF [1]
+      # Proxy Nodes
   - name: China
     type: select
     proxies:
@@ -225,22 +129,7 @@ Proxy Group:
     url: http://www.gstatic.com/generate_204
     interval: 500
     proxies:
-      - 🇭🇰 专线 深港01 [1] NF
-      - 🇭🇰 专线 深港02 [1] NF
-      - 🇭🇰 专线 深港03 [1] NF
-      - 🇭🇰 专线 深港04 [1] NF
-      - 🇭🇰 专线 深港05 [1] NF
-      - 🇭🇰 BGP 香港02 NF [1]
-      - 🇭🇰 BGP 香港03 NF [1]
-      - 🇭🇰 BGP 香港04 NF [1]
-      - 🇭🇰 [v2ray] 香港01 NF [1]
-      - 🇭🇰 [v2ray] 香港02 NF [1]
-      - 🇭🇰 [v2ray] 香港03 NF [1]
-      - 🇭🇰 [v2ray] 香港04 [1] NF
-      - 🇭🇰 [v2ray] 香港05 [1] NF
-      - 🇭🇰 [v2ray] 香港06 NF [1]
-      - 🇭🇰 [v2ray] 香港07 NF [1]
-      - 🇭🇰 [v2ray] 香港08 NF [1]
+      # Proxy Nodes for Netflix
   - name: Other
     type: select
     proxies:
