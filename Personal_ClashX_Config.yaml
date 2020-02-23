@@ -12,7 +12,7 @@ port: 7890
 socks-port: 7891
 
 # Linux 和 macOS 的 redir 代理端口 (如需使用此功能，请取消注释)
-# redir-port: 7892
+redir-port: 7892
 
 # 允许局域网的连接（可用来共享代理）
 allow-lan: true
@@ -30,14 +30,14 @@ mode: Rule
 log-level: silent
 
 # clash 的 RESTful API
-external-controller: 127.0.0.1:9090
+external-controller: '0.0.0.0:9090'
 
 # 您可以将静态网页资源（如 clash-dashboard）放置在一个目录中，clash 将会服务于 `${API}/ui`
 # 参数应填写配置目录的相对路径或绝对路径。
 # external-ui: folder
 
 # RESTful API 的口令 (可选)
-# secret: ""
+secret: ''
 
 # 实验性功能
 experimental:
@@ -114,27 +114,42 @@ Proxy:
 #   rc4-md5 chacha20 chacha20-ietf xchacha20
 #   chacha20-ietf-poly1305 xchacha20-ietf-poly1305
 
+# 在这里填写节点信息
+
 Proxy Group:
 # url-test 可以自动选择与指定 URL 测速后，延迟最短的服务器
-  - name: Proxy
-    type: select
-    proxies:
-      # Proxy Nodes
-  - name: China
-    type: select
-    proxies:
-      - DIRECT
-  - name: Netflix
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 500
-    proxies:
-      # Proxy Nodes for Netflix
-  - name: Other
-    type: select
-    proxies:
-      - Proxy
-      - DIRECT
+-
+  name: Proxy
+  type: select
+  proxies:
+  
+# 在这里填写节点名称
+
+-
+  name: Domestic
+  type: select
+  proxies:
+    - DIRECT
+    - Proxy
+-
+  name: AsianTV
+  type: select
+  proxies:
+    - Domestic
+    - Proxy
+-
+  name: GlobalTV
+  type: select # 或者使用 url-test 自动选择与指定 URL 测速后，延迟最短的服务器
+  # url: http://www.gstatic.com/generate_204 使用 url-test 就去掉注释
+  # interval: 500 使用 url-test 就去掉注释
+  proxies:
+    - Proxy
+-
+  name: Others
+  type: select
+  proxies:
+    - Proxy
+    - DIRECT
 
 Rule:
 # Apple
@@ -158,16 +173,32 @@ Rule:
   - DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
   #DOMAIN,e.crashlytics.com,REJECT //注释此选项有助于大多数App开发者分析崩溃信息；如果您拒绝一切崩溃数据统计、搜集，请取消 # 注释。
 
+# GlobalTV
+
 # Netflix
 
-  - DOMAIN-KEYWORD,netflix,Proxy
-  - DOMAIN-KEYWORD,nflx,Proxy
+  - DOMAIN-SUFFIX,netflix.com,GlobalTV
+  - DOMAIN-SUFFIX,netflix.net,GlobalTV
+  - DOMAIN-SUFFIX,nflxext.com,GlobalTV
+  - DOMAIN-SUFFIX,nflximg.com,GlobalTV
+  - DOMAIN-SUFFIX,nflximg.net,GlobalTV
+  - DOMAIN-SUFFIX,nflxso.net,GlobalTV
+  - DOMAIN-SUFFIX,nflxvideo.net,GlobalTV
+
+# HBO & HBO Go
+
+  - DOMAIN-SUFFIX,execute-api.ap-southeast-1.amazonaws.com,GlobalTV
+  - DOMAIN-SUFFIX,hbo.com,GlobalTV
+  - DOMAIN-SUFFIX,hboasia.com,GlobalTV
+  - DOMAIN-SUFFIX,hbogo.com,GlobalTV
+  - DOMAIN-SUFFIX,hbogoasia.hk,GlobalTV
+
+# Youtube
   
-# Slack
-  
-  - DOMAIN-SUFFIX,slack-edge.com,Proxy
-  - DOMAIN-SUFFIX,slack.com,Proxy
-  - DOMAIN-SUFFIX,slack-msgs.com,Proxy
+  - DOMAIN-KEYWORD,youtube,GlobalTV
+  - DOMAIN-SUFFIX,googlevideo.com,GlobalTV
+  - DOMAIN-SUFFIX,gvt2.com,GlobalTV
+  - DOMAIN-SUFFIX,youtu.be,GlobalTV
   
 # Porn
 
@@ -176,6 +207,64 @@ Rule:
   - DOMAIN-SUFFIX,t66y.com,Proxy
   - DOMAIN-SUFFIX,xvideos.com,Proxy
   - DOMAIN-SUFFIX,kdw019.com,Proxy
+  
+# AsianTV
+
+# Bilibili
+
+  - DOMAIN-KEYWORD,bilibili,AsianTV
+  - DOMAIN-SUFFIX,acg.tv,AsianTV
+  - DOMAIN-SUFFIX,acgvideo.com,AsianTV
+  - DOMAIN-SUFFIX,b23.tv,AsianTV
+  - DOMAIN-SUFFIX,biliapi.com,AsianTV
+  - DOMAIN-SUFFIX,biliapi.net,AsianTV
+  - DOMAIN-SUFFIX,bilibili.com,AsianTV
+  - DOMAIN-SUFFIX,biligame.com,AsianTV
+  - DOMAIN-SUFFIX,biligame.net,AsianTV
+  - DOMAIN-SUFFIX,hdslb.com,AsianTV
+  - DOMAIN-SUFFIX,im9.com,AsianTV
+  
+# IQIYI
+
+  - DOMAIN-KEYWORD,qiyi,AsianTV
+  - DOMAIN-SUFFIX,qy.net,AsianTV
+  
+# Tencent Video
+
+  - DOMAIN-SUFFIX,vv.video.qq.com,AsianTV
+  
+# letv
+
+  - DOMAIN-SUFFIX,api.mob.app.letv.com,AsianTV
+  
+# NeteaseMusic
+  
+  - DOMAIN-SUFFIX,163yun.com,AsianTV
+  - DOMAIN-SUFFIX,music.126.net,AsianTV
+  - DOMAIN-SUFFIX,music.163.com,AsianTV
+  
+# Chatting
+
+# Telegram
+  
+  - DOMAIN-SUFFIX,telegra.ph,Proxy
+  - DOMAIN-SUFFIX,telegram.org,Proxy
+
+  - IP-CIDR,91.108.4.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.8.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.12.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.16.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.56.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.160.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.164.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.168.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.172.0/22,Proxy,no-resolve
+
+# Slack
+  
+  - DOMAIN-SUFFIX,slack-edge.com,Proxy
+  - DOMAIN-SUFFIX,slack.com,Proxy
+  - DOMAIN-SUFFIX,slack-msgs.com,Proxy
 
 # 自定义规则
   ## 您可以在此处插入您补充的自定义规则（请注意保持缩进）
@@ -620,20 +709,6 @@ Rule:
   - DOMAIN-SUFFIX,ying.com,Proxy
   - DOMAIN-SUFFIX,yoyo.org,Proxy
   - DOMAIN-SUFFIX,ytimg.com,Proxy
-
-# Telegram
-  - DOMAIN-SUFFIX,telegra.ph,Proxy
-  - DOMAIN-SUFFIX,telegram.org,Proxy
-
-  - IP-CIDR,91.108.4.0/22,Proxy,no-resolve
-  - IP-CIDR,91.108.8.0/22,Proxy,no-resolve
-  - IP-CIDR,91.108.12.0/22,Proxy,no-resolve
-  - IP-CIDR,91.108.16.0/22,Proxy,no-resolve
-  - IP-CIDR,91.108.56.0/22,Proxy,no-resolve
-  - IP-CIDR,149.154.160.0/22,Proxy,no-resolve
-  - IP-CIDR,149.154.164.0/22,Proxy,no-resolve
-  - IP-CIDR,149.154.168.0/22,Proxy,no-resolve
-  - IP-CIDR,149.154.172.0/22,Proxy,no-resolve
 
 # LAN
   - DOMAIN-SUFFIX,local,DIRECT
