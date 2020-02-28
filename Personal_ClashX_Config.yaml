@@ -153,7 +153,8 @@ Proxy Group:
 
 Rule:
 # Apple
-  - DOMAIN,safebrowsing.urlsec.qq.com,DIRECT # 如果您并不信任此服务提供商或防止其下载消耗过多带宽资源，可以进入 Safari 设置，关闭 Fraudulent Website Warning 功能，并使用 REJECT 策略。
+
+  - DOMAIN,safebrowsing.urlsec.qq.com,REJECT # 如果您并不信任此服务提供商或防止其下载消耗过多带宽资源，可以进入 Safari 设置，关闭 Fraudulent Website Warning 功能，并使用 REJECT 策略。
   - DOMAIN,safebrowsing.googleapis.com,DIRECT # 如果您并不信任此服务提供商或防止其下载消耗过多带宽资源，可以进入 Safari 设置，关闭 Fraudulent Website Warning 功能，并使用 REJECT 策略。
   - DOMAIN-SUFFIX,apps.apple.com,Proxy
   - DOMAIN-SUFFIX,itunes.apple.com,Proxy
@@ -174,7 +175,6 @@ Rule:
   #DOMAIN,e.crashlytics.com,REJECT //注释此选项有助于大多数App开发者分析崩溃信息；如果您拒绝一切崩溃数据统计、搜集，请取消 # 注释。
 
 # GlobalTV
-
 # Netflix
 
   - DOMAIN-SUFFIX,netflix.com,GlobalTV
@@ -209,7 +209,6 @@ Rule:
   - DOMAIN-SUFFIX,kdw019.com,Proxy
   
 # AsianTV
-
 # Bilibili
 
   - DOMAIN-KEYWORD,bilibili,AsianTV
@@ -244,7 +243,6 @@ Rule:
   - DOMAIN-SUFFIX,music.163.com,AsianTV
   
 # Chatting
-
 # Telegram
   
   - DOMAIN-SUFFIX,telegra.ph,Proxy
@@ -266,10 +264,8 @@ Rule:
   - DOMAIN-SUFFIX,slack.com,Proxy
   - DOMAIN-SUFFIX,slack-msgs.com,Proxy
 
-# 自定义规则
-  ## 您可以在此处插入您补充的自定义规则（请注意保持缩进）
-
 # 国内网站
+
   - DOMAIN-SUFFIX,cn,DIRECT
   - DOMAIN-KEYWORD,-cn,DIRECT
 
@@ -400,7 +396,8 @@ Rule:
   - DOMAIN-SUFFIX,zimuzu.tv,DIRECT
   - DOMAIN-SUFFIX,zoho.com,DIRECT
 
-# 抗 DNS 污染 
+# 抗 DNS 污染
+
   - DOMAIN-KEYWORD,amazon,Proxy
   - DOMAIN-KEYWORD,google,Proxy
   - DOMAIN-KEYWORD,gmail,Proxy
@@ -417,6 +414,7 @@ Rule:
   - DOMAIN-KEYWORD,whatsapp,Proxy
 
 # 常见广告域名屏蔽
+
   - DOMAIN-KEYWORD,admarvel,REJECT
   - DOMAIN-KEYWORD,admaster,REJECT
   - DOMAIN-KEYWORD,adsage,REJECT
@@ -442,6 +440,7 @@ Rule:
   - DOMAIN-KEYWORD,zjtoolbar,REJECT
 
 # 国外网站
+
   - DOMAIN-SUFFIX,9to5mac.com,Proxy
   - DOMAIN-SUFFIX,abpchina.org,Proxy
   - DOMAIN-SUFFIX,adblockplus.org,Proxy
@@ -710,7 +709,22 @@ Rule:
   - DOMAIN-SUFFIX,yoyo.org,Proxy
   - DOMAIN-SUFFIX,ytimg.com,Proxy
 
+# Telegram
+  - DOMAIN-SUFFIX,telegra.ph,Proxy
+  - DOMAIN-SUFFIX,telegram.org,Proxy
+
+  - IP-CIDR,91.108.4.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.8.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.12.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.16.0/22,Proxy,no-resolve
+  - IP-CIDR,91.108.56.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.160.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.164.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.168.0/22,Proxy,no-resolve
+  - IP-CIDR,149.154.172.0/22,Proxy,no-resolve
+
 # LAN
+
   - DOMAIN-SUFFIX,local,DIRECT
   - IP-CIDR,127.0.0.0/8,DIRECT
   - IP-CIDR,172.16.0.0/12,DIRECT
@@ -720,5 +734,6 @@ Rule:
   - IP-CIDR,100.64.0.0/10,DIRECT
 
 # 最终规则
+
   - GEOIP,CN,DIRECT
   - MATCH,Proxy
