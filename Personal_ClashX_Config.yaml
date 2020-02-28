@@ -193,11 +193,6 @@ Rule:
   - DOMAIN-SUFFIX,hboasia.com,GlobalTV
   - DOMAIN-SUFFIX,hbogo.com,GlobalTV
   - DOMAIN-SUFFIX,hbogoasia.hk,GlobalTV
-  
-# Spotify
-
-  - DOMAIN-SUFFIX,scdn.co,GlobalTV
-  - DOMAIN-SUFFIX,spotify.com,GlobalTV
 
 # Youtube
   
