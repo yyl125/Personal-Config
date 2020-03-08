@@ -152,6 +152,7 @@ Proxy Group:
     - DIRECT
 
 Rule:
+
 # Apple
 
   - DOMAIN,safebrowsing.urlsec.qq.com,REJECT # 如果您并不信任此服务提供商或防止其下载消耗过多带宽资源，可以进入 Safari 设置，关闭 Fraudulent Website Warning 功能，并使用 REJECT 策略。
@@ -189,6 +190,11 @@ Rule:
   - DOMAIN-SUFFIX,nflximg.net,GlobalTV
   - DOMAIN-SUFFIX,nflxso.net,GlobalTV
   - DOMAIN-SUFFIX,nflxvideo.net,GlobalTV
+  
+# Spotify
+
+  - DOMAIN-SUFFIX,scdn.co,Proxy
+  - DOMAIN-SUFFIX,spotify.com,Proxy
 
 # HBO & HBO Go
 
