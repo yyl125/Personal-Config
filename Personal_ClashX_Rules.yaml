@@ -161,10 +161,10 @@ Rule:
   - DOMAIN-SUFFIX,digicert.com,Proxy
   - DOMAIN-SUFFIX,entrust.net,Proxy
   - DOMAIN,ocsp.verisign.net,Proxy
-  - DOMAIN,itunes.apple.com,Proxy,force-remote-dns
-  - DOMAIN-SUFFIX,apps.apple.com,Proxy,force-remote-dns
+  - DOMAIN,itunes.apple.com,DIRECT
+  - DOMAIN-SUFFIX,apps.apple.com,DIRECT
   - DOMAIN-SUFFIX,blobstore.apple.com,Proxy
-  - DOMAIN-SUFFIX,music.apple.com,DIRECT,force-remote-dns
+  - DOMAIN-SUFFIX,music.apple.com,DIRECT
   - DOMAIN-SUFFIX,mzstatic.com,DIRECT
   - DOMAIN-SUFFIX,itunes.apple.com,DIRECT
   - DOMAIN-SUFFIX,icloud.com,DIRECT
@@ -211,7 +211,7 @@ Rule:
   
 # Porn
 
-  - DOMAIN-SUFFIX,91porn.com,Proxy,force-remote-dns
+  - DOMAIN-SUFFIX,91porn.com,Proxy
   - DOMAIN-SUFFIX,pornhub.com,Proxy
   - DOMAIN-SUFFIX,t66y.com,Proxy
   - DOMAIN-SUFFIX,xvideos.com,Proxy
