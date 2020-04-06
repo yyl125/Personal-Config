@@ -217,6 +217,66 @@ Rule:
   - DOMAIN-SUFFIX,xvideos.com,Proxy
   - DOMAIN-SUFFIX,kdw019.com,Proxy
   
+# Marketing
+
+  - DOMAIN-SUFFIX,4009997658.com,REJECT
+  - DOMAIN-SUFFIX,abbyychina.com,REJECT
+  - DOMAIN-SUFFIX,bartender.cc,REJECT
+  - DOMAIN-SUFFIX,betterzip.net,REJECT
+  - DOMAIN-SUFFIX,betterzipcn.com,REJECT
+  - DOMAIN-SUFFIX,beyondcompare.cc,REJECT
+  - DOMAIN-SUFFIX,bingdianhuanyuan.cn,REJECT
+  - DOMAIN-SUFFIX,chemdraw.com.cn,REJECT
+  - DOMAIN-SUFFIX,cjmakeding.com,REJECT
+  - DOMAIN-SUFFIX,cjmkt.com,REJECT
+  - DOMAIN-SUFFIX,codesoftchina.com,REJECT
+  - DOMAIN-SUFFIX,coreldrawchina.com,REJECT
+  - DOMAIN-SUFFIX,crossoverchina.com,REJECT
+  - DOMAIN-SUFFIX,dongmansoft.com,REJECT
+  - DOMAIN-SUFFIX,earmasterchina.cn,REJECT
+  - DOMAIN-SUFFIX,easyrecoverychina.com,REJECT
+  - DOMAIN-SUFFIX,ediuschina.com,REJECT
+  - DOMAIN-SUFFIX,flstudiochina.com,REJECT
+  - DOMAIN-SUFFIX,formysql.com,REJECT
+  - DOMAIN-SUFFIX,guitarpro.cc,REJECT
+  - DOMAIN-SUFFIX,huishenghuiying.com.cn,REJECT
+  - DOMAIN-SUFFIX,hypersnap.net,REJECT
+  - DOMAIN-SUFFIX,iconworkshop.cn,REJECT
+  - DOMAIN-SUFFIX,imindmap.cc,REJECT
+  - DOMAIN-SUFFIX,jihehuaban.com.cn,REJECT
+  - DOMAIN-SUFFIX,keyshot.cc,REJECT
+  - DOMAIN-SUFFIX,kingdeecn.cn,REJECT
+  - DOMAIN-SUFFIX,logoshejishi.com,REJECT
+  - DOMAIN-SUFFIX,luping.net.cn,REJECT
+  - DOMAIN-SUFFIX,mairuan.cn,REJECT
+  - DOMAIN-SUFFIX,mairuan.com,REJECT
+  - DOMAIN-SUFFIX,mairuan.com.cn,REJECT
+  - DOMAIN-SUFFIX,mairuan.net,REJECT
+  - DOMAIN-SUFFIX,mairuanwang.com,REJECT
+  - DOMAIN-SUFFIX,makeding.com,REJECT
+  - DOMAIN-SUFFIX,mathtype.cn,REJECT
+  - DOMAIN-SUFFIX,mindmanager.cc,REJECT
+  - DOMAIN-SUFFIX,mindmanager.cn,REJECT
+  - DOMAIN-SUFFIX,mindmapper.cc,REJECT
+  - DOMAIN-SUFFIX,mycleanmymac.com,REJECT
+  - DOMAIN-SUFFIX,nicelabel.cc,REJECT
+  - DOMAIN-SUFFIX,ntfsformac.cc,REJECT
+  - DOMAIN-SUFFIX,ntfsformac.cn,REJECT
+  - DOMAIN-SUFFIX,overturechina.com,REJECT
+  - DOMAIN-SUFFIX,passwordrecovery.cn,REJECT
+  - DOMAIN-SUFFIX,pdfexpert.cc,REJECT
+  - DOMAIN-SUFFIX,photozoomchina.com,REJECT
+  - DOMAIN-SUFFIX,shankejingling.com,REJECT
+  - DOMAIN-SUFFIX,ultraiso.net,REJECT
+  - DOMAIN-SUFFIX,vegaschina.cn,REJECT
+  - DOMAIN-SUFFIX,xitongqingli.com,REJECT
+  - DOMAIN-SUFFIX,xmindchina.net,REJECT
+  - DOMAIN-SUFFIX,xshellcn.com,REJECT
+  - DOMAIN-SUFFIX,yihuifu.cn,REJECT
+  - DOMAIN-SUFFIX,yuanchengxiezuo.com,REJECT
+  - DOMAIN-SUFFIX,zbrushcn.com,REJECT
+  - DOMAIN-SUFFIX,zhzzx.com,REJECT
+  
 # AsianTV
   
 # IQIYI
