@@ -154,7 +154,6 @@ Proxy Group:
 Rule:
 
 # Apple
-
   - DOMAIN,safebrowsing.urlsec.qq.com,REJECT # 如果您并不信任此服务提供商或防止其下载消耗过多带宽资源，可以进入 Safari 设置，关闭 Fraudulent Website Warning 功能，并使用 REJECT 策略。
   - DOMAIN,safebrowsing.googleapis.com,Proxy # 如果您并不信任此服务提供商或防止其下载消耗过多带宽资源，可以进入 Safari 设置，关闭 Fraudulent Website Warning 功能，并使用 REJECT 策略。
   - DOMAIN,ocsp.apple.com,Proxy
@@ -175,7 +174,7 @@ Rule:
   - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
   - DOMAIN-SUFFIX,apple.com,DIRECT
   - DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
-  #DOMAIN,e.crashlytics.com,REJECT //注释此选项有助于大多数App开发者分析崩溃信息；如果您拒绝一切崩溃数据统计、搜集，请取消 # 注释。。
+  #DOMAIN,e.crashlytics.com,REJECT //注释此选项有助于大多数App开发者分析崩溃信息；如果您拒绝一切崩溃数据统计、搜集，请取消 # 注释。
 
 # Stream
 
@@ -191,8 +190,9 @@ Rule:
   
 # Spotify
 
-  - DOMAIN-SUFFIX,scdn.co,Proxy
-  - DOMAIN-SUFFIX,spotify.com,Proxy
+  - DOMAIN-KEYWORD,spotify,GlobalTV
+  - DOMAIN-SUFFIX,scdn.co,GlobalTV
+  - DOMAIN-SUFFIX,spotify.com,GlobalTV
 
 # HBO & HBO Go
 
@@ -209,13 +209,30 @@ Rule:
   - DOMAIN-SUFFIX,gvt2.com,GlobalTV
   - DOMAIN-SUFFIX,youtu.be,GlobalTV
   
+# AsianTV
+    
+# IQIYI
+
+  - DOMAIN-KEYWORD,qiyi,AsianTV
+  - DOMAIN-SUFFIX,qy.net,AsianTV
+    
+# Tencent Video
+
+  - DOMAIN-SUFFIX,vv.video.qq.com,AsianTV
+    
+# NeteaseMusic
+    
+  - DOMAIN-SUFFIX,163yun.com,AsianTV
+  - DOMAIN-SUFFIX,music.126.net,AsianTV
+  - DOMAIN-SUFFIX,music.163.com,AsianTV
+  
 # Porn
 
-  - DOMAIN-SUFFIX,91porn.com,Proxy
-  - DOMAIN-SUFFIX,pornhub.com,Proxy
-  - DOMAIN-SUFFIX,t66y.com,Proxy
-  - DOMAIN-SUFFIX,xvideos.com,Proxy
-  - DOMAIN-SUFFIX,kdw019.com,Proxy
+  - DOMAIN-SUFFIX,91porn.com,GlobalTV
+  - DOMAIN-SUFFIX,pornhub.com,GlobalTV
+  - DOMAIN-SUFFIX,t66y.com,GlobalTV
+  - DOMAIN-SUFFIX,xvideos.com,GlobalTV
+  - DOMAIN-SUFFIX,kdw019.com,GlobalTV
   
 # Marketing
 
@@ -277,28 +294,13 @@ Rule:
   - DOMAIN-SUFFIX,zbrushcn.com,REJECT
   - DOMAIN-SUFFIX,zhzzx.com,REJECT
   
-# AsianTV
-  
-# IQIYI
+# Torrent & Bittorrent
 
-  - DOMAIN-KEYWORD,qiyi,AsianTV
-  - DOMAIN-SUFFIX,qy.net,AsianTV
-  
-# Tencent Video
-
-  - DOMAIN-SUFFIX,vv.video.qq.com,AsianTV
-  
-# letv
-
-  - DOMAIN-SUFFIX,api.mob.app.letv.com,AsianTV
-  
-# NeteaseMusic
-  
-  - DOMAIN-SUFFIX,163yun.com,AsianTV
-  - DOMAIN-SUFFIX,music.126.net,AsianTV
-  - DOMAIN-SUFFIX,music.163.com,AsianTV
+  - DOMAIN-KEYWORD,torrent,DIRECT
+  - DOMAIN-KEYWORD,Bittorrent,DIRECT
   
 # Chatting
+
 # Telegram
   
   - DOMAIN-SUFFIX,telegra.ph,Proxy
