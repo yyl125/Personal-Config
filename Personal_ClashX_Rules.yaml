@@ -297,7 +297,7 @@ Rule:
 # Torrent & Bittorrent
 
   - DOMAIN-KEYWORD,torrent,DIRECT
-  - DOMAIN-KEYWORD,Bittorrent,DIRECT
+  - DOMAIN-KEYWORD,bittorrent,DIRECT
   
 # Chatting
 
