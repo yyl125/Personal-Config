@@ -1,6 +1,6 @@
 ## 简介
 
-本规则基于 [Hackl0us 的懒人规则](https://github.com/Hackl0us/SS-Rule-Snippet)，加入了一些适合自己个人的规则片段。本规则不定期随 Hackl0us 的相关规则进行更新
+本规则基于 [Hackl0us 的 SS-Rule-Snippet 项目](https://github.com/Hackl0us/SS-Rule-Snippet)，并加入了一些适合自己个人的规则片段。本规则不定期随 Hackl0us 的相关规则进行更新
 
 ## 导入方法
 
