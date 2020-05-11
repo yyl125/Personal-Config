@@ -766,7 +766,6 @@ Rule:
   - DOMAIN-SUFFIX,ying.com,Proxy
   - DOMAIN-SUFFIX,yoyo.org,Proxy
   - DOMAIN-SUFFIX,ytimg.com,Proxy
-  - DOMAIN-SUFFIX,imdb.com,DIRECT
 
 # LAN
 
