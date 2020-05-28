@@ -209,6 +209,10 @@ Rule:
   - DOMAIN-SUFFIX,gvt2.com,GlobalTV
   - DOMAIN-SUFFIX,youtu.be,GlobalTV
   
+# IMDb
+
+  - DOMAIN-SUFFIX,imdb.com,DIRECT
+  
 # AsianTV
     
 # IQIYI
