@@ -238,7 +238,7 @@ Rule:
   - DOMAIN-SUFFIX,xvideos.com,GlobalTV
   - DOMAIN-SUFFIX,kdw019.com,GlobalTV
   
-# Marketing
+# Fuck CJ Marketing
 
   - DOMAIN-SUFFIX,4009997658.com,REJECT
   - DOMAIN-SUFFIX,abbyychina.com,REJECT
@@ -257,6 +257,7 @@ Rule:
   - DOMAIN-SUFFIX,earmasterchina.cn,REJECT
   - DOMAIN-SUFFIX,easyrecoverychina.com,REJECT
   - DOMAIN-SUFFIX,ediuschina.com,REJECT
+  - DOMAIN-SUFFIX,flash.cn,REJECT
   - DOMAIN-SUFFIX,flstudiochina.com,REJECT
   - DOMAIN-SUFFIX,formysql.com,REJECT
   - DOMAIN-SUFFIX,guitarpro.cc,REJECT
