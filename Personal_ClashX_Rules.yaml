@@ -59,11 +59,10 @@ proxy-groups:
 # url-test 可以自动选择与指定 URL 测速后，延迟最短的服务器
 # 在 * 这里填写 proxies 的内容，用「"」包裹
 - { name: "proxies", type: select, proxies: [*], url: "http://www.gstatic.com/generate_204", interval: 300 }
-
-- { name: Domestic,type: select, proxies: [DIRECT,proxies] }
-- { name: AsianTV,type: select, proxies: [Domestic] }
-- { name: GlobalTV,type: select, proxies: [proxies] }
-- { name: Others,type: select, proxies: [DIRECT,proxies] }
+- { name: Domestic,type: select, proxies: ["DIRECT","proxies"] }
+- { name: AsianTV,type: select, proxies: ["DIRECT","proxies"] }
+- { name: GlobalTV,type: select, proxies: ["proxies"] }
+- { name: Others,type: select, proxies: ["DIRECT","proxies"] }
 
 rules:
 
