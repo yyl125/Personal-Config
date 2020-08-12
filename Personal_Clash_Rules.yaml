@@ -35,7 +35,8 @@ experimental:
 
 dns:
   enable: true
-  ipv6: false
+  listen: 0.0.0.0:53
+  ipv6: true
 
   nameserver:
     - 1.2.4.8
