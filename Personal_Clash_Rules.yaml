@@ -78,6 +78,7 @@ rules:
   - DOMAIN,itunes.apple.com,DIRECT
   - DOMAIN-SUFFIX,apps.apple.com,DIRECT
   - DOMAIN-SUFFIX,blobstore.apple.com,proxies
+  - DOMAIN,cvws.icloud-content.com,proxies
   - DOMAIN-SUFFIX,music.apple.com,DIRECT
   - DOMAIN-SUFFIX,mzstatic.com,DIRECT
   - DOMAIN-SUFFIX,itunes.apple.com,DIRECT
