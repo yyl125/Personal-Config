@@ -256,7 +256,6 @@ rules:
   - DOMAIN-SUFFIX,acfun.tv,DIRECT
   - DOMAIN-SUFFIX,air-matters.com,DIRECT
   - DOMAIN-SUFFIX,aixifan.com,DIRECT
-  - DOMAIN-SUFFIX,akamaized.net,DIRECT
   - DOMAIN-KEYWORD,alicdn,DIRECT
   - DOMAIN-KEYWORD,alipay,DIRECT
   - DOMAIN-KEYWORD,taobao,DIRECT
@@ -423,6 +422,7 @@ rules:
   - DOMAIN-SUFFIX,abpchina.org,proxies
   - DOMAIN-SUFFIX,adblockplus.org,proxies
   - DOMAIN-SUFFIX,adobe.com,proxies
+  - DOMAIN-SUFFIX,akamaized.net,proxies
   - DOMAIN-SUFFIX,alfredapp.com,proxies
   - DOMAIN-SUFFIX,amplitude.com,proxies
   - DOMAIN-SUFFIX,ampproject.org,proxies
