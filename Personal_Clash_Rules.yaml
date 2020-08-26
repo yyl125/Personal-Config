@@ -90,7 +90,7 @@ rules:
 - DOMAIN-SUFFIX,apple.com,DIRECT
 - DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
 - DOMAIN-SUFFIX,appsto.re,Proxy
-- DOMAIN,beta.itunes.apple.com,Proxy
+- DOMAIN-SUFFIX,beta.itunes.apple.com,Proxy
 - DOMAIN,books.itunes.apple.com,Proxy
 - DOMAIN,hls.itunes.apple.com,Proxy
 - DOMAIN,api-glb-sea.smoot.apple.com,Proxy
