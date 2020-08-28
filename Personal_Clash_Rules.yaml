@@ -68,12 +68,17 @@ proxy-groups:
 rules:
 
 # Apple
+
 - DOMAIN,safebrowsing.urlsec.qq.com,REJECT
 - DOMAIN,safebrowsing.googleapis.com,Proxy
 - DOMAIN,ocsp.apple.com,Proxy
 - DOMAIN-SUFFIX,digicert.com,Proxy
 - DOMAIN-SUFFIX,entrust.net,Proxy
+- DOMAIN,developer.apple.com,Proxy
+- DOMAIN-SUFFIX,digicert.com,Proxy
 - DOMAIN,ocsp.verisign.net,Proxy
+- DOMAIN,testflight.apple.com,Proxy
+- DOMAIN,sandbox.itunes.apple.com,Proxy
 - DOMAIN,itunes.apple.com,DIRECT
 - DOMAIN-SUFFIX,apps.apple.com,DIRECT
 - DOMAIN-SUFFIX,blobstore.apple.com,Proxy
@@ -158,17 +163,49 @@ rules:
 - DOMAIN-SUFFIX,zbrushcn.com,REJECT
 - DOMAIN-SUFFIX,zhzzx.com,REJECT
 
+# AD Site
+
+- DOMAIN-KEYWORD,admarvel,REJECT
+- DOMAIN-KEYWORD,admaster,REJECT
+- DOMAIN-KEYWORD,adsage,REJECT
+- DOMAIN-KEYWORD,adsmogo,REJECT
+- DOMAIN-KEYWORD,adsrvmedia,REJECT
+- DOMAIN-KEYWORD,adwords,REJECT
+- DOMAIN-KEYWORD,adservice,REJECT
+- DOMAIN-SUFFIX,appsflyer.com,REJECT
+- DOMAIN-KEYWORD,domob,REJECT
+- DOMAIN-SUFFIX,doubleclick.net,REJECT
+- DOMAIN-KEYWORD,duomeng,REJECT
+- DOMAIN-KEYWORD,dwtrack,REJECT
+- DOMAIN-KEYWORD,guanggao,REJECT
+- DOMAIN-KEYWORD,lianmeng,REJECT
+- DOMAIN-SUFFIX,mmstat.com,REJECT
+- DOMAIN-KEYWORD,omgmta,REJECT
+- DOMAIN-KEYWORD,openx,REJECT
+- DOMAIN-KEYWORD,partnerad,REJECT
+- DOMAIN-KEYWORD,pingfore,REJECT
+- DOMAIN-KEYWORD,supersonicads,REJECT
+- DOMAIN-KEYWORD,uedas,REJECT
+- DOMAIN-KEYWORD,umeng,REJECT
+- DOMAIN-KEYWORD,usage,REJECT
+- DOMAIN-SUFFIX,vungle.com,REJECT
+- DOMAIN-KEYWORD,wlmonitor,REJECT
+- DOMAIN-KEYWORD,zjtoolbar,REJECT
+
 # Torrent & Bittorrent
 
 - DOMAIN-KEYWORD,torrent,DIRECT
 - DOMAIN-KEYWORD,bittorrent,DIRECT
 
 # GlobalTV
+
 # ABC
+
 - DOMAIN-SUFFIX,edgedatg.com,Global
 - DOMAIN-SUFFIX,go.com,Global
 
 # AbemaTV
+
 - DOMAIN,linear-abematv.akamaized.net,Global
 - DOMAIN-SUFFIX,abema.io,Global
 - DOMAIN-SUFFIX,abema.tv,Global
@@ -177,17 +214,20 @@ rules:
 - DOMAIN-SUFFIX,hayabusa.io,Global
 
 # Amazon Prime Video
+
 - DOMAIN-SUFFIX,aiv-cdn.net,Global
 - DOMAIN-SUFFIX,amazonaws.com,Global
 - DOMAIN-SUFFIX,amazonvideo.com,Global
 - DOMAIN-SUFFIX,llnwd.net,Global
 
 # Bahamut
+
 - DOMAIN-SUFFIX,bahamut.com.tw,Global
 - DOMAIN-SUFFIX,gamer.com.tw,Global
 - DOMAIN-SUFFIX,hinet.net,Global
 
 # BBC
+
 - DOMAIN-KEYWORD,bbcfmt,Global
 - DOMAIN-KEYWORD,co.uk,Global
 - DOMAIN-KEYWORD,uk-live,Global
@@ -198,13 +238,16 @@ rules:
 - DOMAIN-SUFFIX,bbci.co.uk,Global
 
 # CHOCO TV
+
 - DOMAIN-SUFFIX,chocotv.com.tw,Global
 
 # Epicgames
+
 - DOMAIN-KEYWORD,epicgames,Global
 - DOMAIN-SUFFIX,helpshift.com,Global
 
 # Fox+
+
 - DOMAIN-KEYWORD,foxplus,Global
 - DOMAIN-SUFFIX,config.fox.com,Global
 - DOMAIN-SUFFIX,emome.net,Global
@@ -220,6 +263,7 @@ rules:
 - DOMAIN-SUFFIX,urlload.net,Global
 
 # HBO & HBO Go
+
 - DOMAIN-SUFFIX,execute-api.ap-southeast-1.amazonaws.com,Global
 - DOMAIN-SUFFIX,hbo.com,Global
 - DOMAIN-SUFFIX,hboasia.com,Global
@@ -227,24 +271,29 @@ rules:
 - DOMAIN-SUFFIX,hbogoasia.hk,Global
 
 # Hulu
+
 - DOMAIN-SUFFIX,happyon.jp,Global
 - DOMAIN-SUFFIX,hulu.com,Global
 - DOMAIN-SUFFIX,huluim.com,Global
 - DOMAIN-SUFFIX,hulustream.com,Global
 
 # Imkan
+
 - DOMAIN-SUFFIX,imkan.tv,Global
 
 # JOOX
+
 - DOMAIN-SUFFIX,joox.com,Global
 
 # MytvSUPER
+
 - DOMAIN-KEYWORD,nowtv100,Global
 - DOMAIN-KEYWORD,rthklive,Global
 - DOMAIN-SUFFIX,mytvsuper.com,Global
 - DOMAIN-SUFFIX,tvb.com,Global
 
 # Netflix
+
 - DOMAIN-SUFFIX,netflix.com,Global
 - DOMAIN-SUFFIX,netflix.net,Global
 - DOMAIN-SUFFIX,nflxext.com,Global
@@ -254,27 +303,33 @@ rules:
 - DOMAIN-SUFFIX,nflxvideo.net,Global
 
 # Pandora
+
 - DOMAIN-SUFFIX,pandora.com,Global
 
 # Sky GO
+
 - DOMAIN-SUFFIX,sky.com,Global
 - DOMAIN-SUFFIX,skygo.co.nz,Global
 
 # Spotify
+
 - DOMAIN-KEYWORD,spotify,Global
 - DOMAIN-SUFFIX,scdn.co,Global
 - DOMAIN-SUFFIX,spoti.fi,Global
 
 # viuTV
+
 - DOMAIN-SUFFIX,viu.tv,Global
 
 # Youtube
+
 - DOMAIN-KEYWORD,youtube,Global
 - DOMAIN-SUFFIX,googlevideo.com,Global
 - DOMAIN-SUFFIX,gvt2.com,Global
 - DOMAIN-SUFFIX,youtu.be,Global
 
 # Porn
+
 - DOMAIN-SUFFIX,91porn.com,Global
 - DOMAIN-SUFFIX,pornhub.com,Global
 - DOMAIN-SUFFIX,t66y.com,Global
@@ -282,7 +337,9 @@ rules:
 - DOMAIN-SUFFIX,jable.tv,Global
 
 # AsianTV
+
 # Bilibili
+
 - DOMAIN-KEYWORD,bilibili,DIRECT
 - DOMAIN-SUFFIX,acg.tv,DIRECT
 - DOMAIN-SUFFIX,acgvideo.com,DIRECT
@@ -297,45 +354,59 @@ rules:
 - DOMAIN-SUFFIX,im9.com,DIRECT
 
 # IQIYI
+
 - DOMAIN-KEYWORD,qiyi,DIRECT
 - DOMAIN-SUFFIX,qy.net,DIRECT
 
 # letv
+
 - DOMAIN-SUFFIX,api.mob.app.letv.com,DIRECT
 
 # NeteaseMusic
+
 - DOMAIN-SUFFIX,163yun.com,DIRECT
 - DOMAIN-SUFFIX,music.126.net,DIRECT
 - DOMAIN-SUFFIX,music.163.com,DIRECT
     
 # Tencent Video
+
 - DOMAIN-SUFFIX,vv.video.qq.com,DIRECT
     
 # China Area Network
+
 # Microsoft
+
 - DOMAIN-SUFFIX,microsoft.com,DIRECT
 - DOMAIN-SUFFIX,windows.net,DIRECT
 - DOMAIN-SUFFIX,sfx.ms,DIRECT
 - DOMAIN-SUFFIX,sharepoint.com,DIRECT
 - DOMAIN-KEYWORD,officecdn,DIRECT
+
 # Blizzard
+
 - DOMAIN-SUFFIX,blizzard.com,DIRECT
 - DOMAIN-SUFFIX,battle.net,DIRECT
 - DOMAIN,blzddist1-a.akamaihd.net,DIRECT
+
 # Steam
+
 - DOMAIN-SUFFIX,steampowered.com,DIRECT
 - DOMAIN-SUFFIX,steam-chat.com,DIRECT
 - DOMAIN-KEYWORD,steamcdn,DIRECT
 - DOMAIN-KEYWORD,steamstore,DIRECT
 - DOMAIN-KEYWORD,steamuserimages,DIRECT
 - DOMAIN-KEYWORD,steambroadcast,DIRECT
+
 # Tencent
+
 #USER-AGENT,MicroMessenger%20Client,DIRECT
 #USER-AGENT,WeChat*,DIRECT
 - DOMAIN-SUFFIX,qq.com,DIRECT
 - DOMAIN-SUFFIX,qpic.cn,DIRECT
 - DOMAIN-SUFFIX,tencent.com,DIRECT
+
 # Alibaba
+
 - DOMAIN-SUFFIX,alibaba.com,DIRECT
 - DOMAIN-SUFFIX,alicdn.com,DIRECT
 - DOMAIN-SUFFIX,amap.com,DIRECT
@@ -346,77 +417,111 @@ rules:
 - DOMAIN-SUFFIX,youku.com,DIRECT
 - DOMAIN-SUFFIX,xiami.com,DIRECT
 - DOMAIN-SUFFIX,xiami.net,DIRECT
+
 # NetEase
+
 - DOMAIN-SUFFIX,163.com,DIRECT
 - DOMAIN-SUFFIX,126.net,DIRECT
 - DOMAIN-SUFFIX,163yun.com,DIRECT
+
 # Sohu
+
 - DOMAIN-SUFFIX,sohu.com.cn,DIRECT
 - DOMAIN-SUFFIX,itc.cn,DIRECT
 - DOMAIN-SUFFIX,sohu.com,DIRECT
 - DOMAIN-SUFFIX,v-56.com,DIRECT
+
 # Sina
+
 - DOMAIN-SUFFIX,weibo.com,DIRECT
 - DOMAIN-SUFFIX,weibo.cn,DIRECT
+
 # JD
+
 - DOMAIN-SUFFIX,jd.com,DIRECT
 - DOMAIN-SUFFIX,jd.hk,DIRECT
 - DOMAIN-SUFFIX,360buyimg.com,DIRECT
+
 # MI
+
 - DOMAIN-SUFFIX,duokan.com,DIRECT
 - DOMAIN-SUFFIX,mi-img.com,DIRECT
 - DOMAIN-SUFFIX,mifile.cn,DIRECT
 - DOMAIN-SUFFIX,xiaomi.com,DIRECT
+
 # bilibili
+
 - DOMAIN-SUFFIX,acgvideo.com,DIRECT
 - DOMAIN-SUFFIX,bilibili.com,DIRECT
 - DOMAIN-SUFFIX,hdslb.com,DIRECT
+
 # iQiyi
+
 - DOMAIN-SUFFIX,iqiyi.com,DIRECT
 - DOMAIN-SUFFIX,iqiyipic.com,DIRECT
 - DOMAIN-SUFFIX,71.am.com,DIRECT
+
 # HunanTV
+
 - DOMAIN-SUFFIX,hitv.com,DIRECT
 - DOMAIN-SUFFIX,mgtv.com,DIRECT
+
 # Meitu
+
 - DOMAIN-SUFFIX,meitu.com,DIRECT
 - DOMAIN-SUFFIX,meitudata.com,DIRECT
 - DOMAIN-SUFFIX,meipai.com,DIRECT
+
 # YYeTs
+
 - DOMAIN-SUFFIX,zmzapi.com,DIRECT
 - DOMAIN-SUFFIX,zimuzu.tv,DIRECT
 - DOMAIN-SUFFIX,zmzfile.com,DIRECT
 - DOMAIN-SUFFIX,zmzapi.net,DIRECT
+
 # 蛋蛋赞
+
 - DOMAIN-SUFFIX,baduziyuan.com,DIRECT
 - DOMAIN-SUFFIX,com-hs-hkdy.com,DIRECT
 - DOMAIN-SUFFIX,czybjz.com,DIRECT
 - DOMAIN-SUFFIX,dandanzan.com,DIRECT
 - DOMAIN-SUFFIX,fjhps.com,DIRECT
 - DOMAIN-SUFFIX,kuyunbo.club,DIRECT
+
 # Baidu
+
 - DOMAIN-SUFFIX,baidu.com,DIRECT
 - DOMAIN-SUFFIX,baidubcr.com,DIRECT
 - DOMAIN-SUFFIX,bdstatic.com,DIRECT
+
 # ChinaNet
+
 - DOMAIN-SUFFIX,189.cn,DIRECT
 - DOMAIN-SUFFIX,21cn.com,DIRECT
+
 # ByteDance
+
 - DOMAIN-SUFFIX,bytecdn.cn,DIRECT
 - DOMAIN-SUFFIX,pstatp.com,DIRECT
 - DOMAIN-SUFFIX,snssdk.com,DIRECT
 - DOMAIN-SUFFIX,toutiao.com,DIRECT
+
 # Content Delivery Network
+
 # Akamai
+
 - DOMAIN-SUFFIX,akadns.net,DIRECT
 # - DOMAIN-SUFFIX,akamai.net,DIRECT
 # - DOMAIN-SUFFIX,akamaiedge.net,DIRECT
 # - DOMAIN-SUFFIX,akamaihd.net,DIRECT
 # - DOMAIN-SUFFIX,akamaistream.net,DIRECT
 # - DOMAIN-SUFFIX,akamaized.net,DIRECT
+
 # ChinaNetCenter
+
 - DOMAIN-SUFFIX,chinanetcenter.com,DIRECT
 - DOMAIN-SUFFIX,wangsu.com,DIRECT
+
 # IP Query
 - DOMAIN-SUFFIX,ipip.net,DIRECT
 - DOMAIN-SUFFIX,ip.cn,DIRECT
@@ -426,7 +531,9 @@ rules:
 - DOMAIN-SUFFIX,test-ipv6.com,DIRECT
 - DOMAIN-SUFFIX,whatismyip.com,DIRECT
 - DOMAIN,ip.bjango.com,DIRECT
+
 # Other
+
 - DOMAIN-SUFFIX,40017.cn,DIRECT
 - DOMAIN-SUFFIX,broadcasthe.net,DIRECT
 - DOMAIN-SUFFIX,cailianpress.com,DIRECT
@@ -473,7 +580,9 @@ rules:
 #USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90*,DIRECT
 
 # (DNS Cache Pollution Protection)
+
 # Google
+
 - DOMAIN-SUFFIX,appspot.com,Global
 - DOMAIN-SUFFIX,blogger.com,Global
 - DOMAIN-SUFFIX,getoutline.org,Global
@@ -483,7 +592,9 @@ rules:
 - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,Global
 - DOMAIN-KEYWORD,google,Global
 - DOMAIN-KEYWORD,blogspot,Global
+
 # Facebook
+
 - DOMAIN-SUFFIX,cdninstagram.com,Global
 - DOMAIN-SUFFIX,fb.com,Global
 - DOMAIN-SUFFIX,fb.me,Global
@@ -500,7 +611,9 @@ rules:
 - DOMAIN-SUFFIX,whatsapp.com,Global
 - DOMAIN-SUFFIX,whatsapp.net,Global
 - DOMAIN-KEYWORD,facebook,Global
+
 # Twitter
+
 - DOMAIN-SUFFIX,pscp.tv,Global
 - DOMAIN-SUFFIX,periscope.tv,Global
 - DOMAIN-SUFFIX,t.co,Global
@@ -509,22 +622,30 @@ rules:
 - DOMAIN-SUFFIX,twitpic.com,Global
 - DOMAIN-SUFFIX,vine.co,Global
 - DOMAIN-KEYWORD,twitter,Global
+
 # Telegram
+
 - DOMAIN-SUFFIX,t.me,Global
 - DOMAIN-SUFFIX,tdesktop.com,Global
 - DOMAIN-SUFFIX,telegra.ph,Global
 - DOMAIN-SUFFIX,telegram.me,Global
 - DOMAIN-SUFFIX,telegram.org,Global
+
 # Slack
+
 - DOMAIN-SUFFIX,slack-edge.com,Global
 - DOMAIN-SUFFIX,slack.com,Global
 - DOMAIN-SUFFIX,slack-msgs.com,Global
+
 # Line
+
 - DOMAIN-SUFFIX,line.me,Global
 - DOMAIN-SUFFIX,line-apps.com,Global
 - DOMAIN-SUFFIX,line-scdn.net,Global
 - DOMAIN-SUFFIX,naver.jp,Global
+
 # Other
+
 - DOMAIN-SUFFIX,4shared.com,Global
 - DOMAIN-SUFFIX,881903.com,Global
 - DOMAIN-SUFFIX,abc.net.au,Global
@@ -729,6 +850,7 @@ rules:
 - DOMAIN-KEYWORD,wikileaks,Global
 
 # Region-Restricted Access Denied
+
 - DOMAIN-SUFFIX,apartmentratings.com,Global
 - DOMAIN-SUFFIX,apartments.com,Global
 - DOMAIN-SUFFIX,bankmobilevibe.com,Global
@@ -780,6 +902,7 @@ rules:
 # The Most Popular Sites
 
 #PROCESS-NAME,LookupViewService,Global
+
 # Google
 - DOMAIN-SUFFIX,abc.xyz,Global
 - DOMAIN-SUFFIX,android.com,Global
@@ -825,10 +948,14 @@ rules:
 - DOMAIN-SUFFIX,youtu.be,Global
 - DOMAIN-SUFFIX,yt.be,Global
 - DOMAIN-SUFFIX,ytimg.com,Global
+
 # Steam
+
 - DOMAIN,media.steampowered.com,Global
 - DOMAIN,store.steampowered.com,Global
+
 # Other
+
 - DOMAIN-SUFFIX,0rz.tw,Global
 - DOMAIN-SUFFIX,4bluestones.biz,Global
 - DOMAIN-SUFFIX,9bis.net,Global
@@ -882,31 +1009,21 @@ rules:
 - DOMAIN-SUFFIX,wolframalpha.com,Global
 - DOMAIN-SUFFIX,x-art.com,Global
 - DOMAIN-SUFFIX,yimg.com,Global
-
 - DOMAIN-KEYWORD,dlercloud,Global
 - DOMAIN-SUFFIX,dler.cloud,Global
 
-# Local Area Network
-- DOMAIN-KEYWORD,announce,DIRECT
-- DOMAIN-KEYWORD,torrent,DIRECT
-- DOMAIN-KEYWORD,tracker,DIRECT
-- DOMAIN-SUFFIX,smtp,DIRECT
-- DOMAIN-SUFFIX,local,DIRECT
-- IP-CIDR,192.168.0.0/16,DIRECT
-- IP-CIDR,10.0.0.0/8,DIRECT
-- IP-CIDR,172.16.0.0/12,DIRECT
-- IP-CIDR,127.0.0.0/8,DIRECT
-- IP-CIDR,100.64.0.0/10,DIRECT
-
 # IQIYI
+
 - IP-CIDR,101.227.0.0/16,DIRECT
 - IP-CIDR,101.224.0.0/13,DIRECT
 - IP-CIDR,119.176.0.0/12,DIRECT
 
 # Youku
+
 - IP-CIDR,106.11.0.0/16,DIRECT
 
 # Telegram
+
 - IP-CIDR,67.198.55.0/24,Global
 - IP-CIDR,91.108.4.0/22,Global
 - IP-CIDR,91.108.8.0/22,Global
@@ -918,7 +1035,9 @@ rules:
 - IP-CIDR,205.172.60.0/22,Global
 
 # (Extra IP-CIRD)
+
 # Google
+
 - IP-CIDR,35.190.247.0/24,Global
 - IP-CIDR,64.233.160.0/19,Global
 - IP-CIDR,66.102.0.0/20,Global
@@ -931,7 +1050,9 @@ rules:
 - IP-CIDR,209.85.128.0/17,Global
 - IP-CIDR,216.58.192.0/19,Global
 - IP-CIDR,216.239.32.0/19,Global
+
 # Facebook
+
 - IP-CIDR,31.13.24.0/21,Global
 - IP-CIDR,31.13.64.0/18,Global
 - IP-CIDR,45.64.40.0/22,Global
@@ -947,7 +1068,9 @@ rules:
 - IP-CIDR,179.60.192.0/22,Global
 - IP-CIDR,185.60.216.0/22,Global
 - IP-CIDR,204.15.20.0/22,Global
+
 # Twitter
+
 - IP-CIDR,69.195.160.0/19,Global
 - IP-CIDR,104.244.42.0/21,Global
 - IP-CIDR,192.133.76.0/22,Global
@@ -957,7 +1080,19 @@ rules:
 - IP-CIDR,202.160.128.0/22,Global
 - IP-CIDR,209.237.192.0/19,Global
 
-# GeoIP China
-- GEOIP,CN,DIRECT
+# LAN
 
-- MATCH,Others
+- DOMAIN,injections.adguard.org,DIRECT
+- DOMAIN,local.adguard.org,DIRECT
+- DOMAIN-SUFFIX,local,DIRECT
+- IP-CIDR,127.0.0.0/8,DIRECT
+- IP-CIDR,172.16.0.0/12,DIRECT
+- IP-CIDR,192.168.0.0/16,DIRECT
+- IP-CIDR,10.0.0.0/8,DIRECT
+- IP-CIDR,17.0.0.0/8,DIRECT
+- IP-CIDR,100.64.0.0/10,DIRECT
+
+# Final Rule
+
+- GEOIP,CN,DIRECT
+- MATCH,Proxy
