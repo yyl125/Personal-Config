@@ -92,7 +92,7 @@ rules:
 - DOMAIN-SUFFIX,akadns.net,DIRECT
 - DOMAIN-SUFFIX,aaplimg.com,DIRECT
 - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
-- DOMAIN-SUFFIX,apple.com,DIRECT
+- DOMAIN-SUFFIX,apple.com,Proxy
 - DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
 - DOMAIN-SUFFIX,appsto.re,Proxy
 - DOMAIN-SUFFIX,beta.itunes.apple.com,Proxy
