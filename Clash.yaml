@@ -352,6 +352,7 @@ rules:
 - DOMAIN-SUFFIX,bilivideo.com,DIRECT
 - DOMAIN-SUFFIX,hdslb.com,DIRECT
 - DOMAIN-SUFFIX,im9.com,DIRECT
+- DOMAIN-SUFFIX,hdlsb.com,DIRECT
 
 # IQIYI
 
