@@ -749,6 +749,7 @@ rules:
 - DOMAIN-SUFFIX,hootsuite.com,Global
 - DOMAIN-SUFFIX,hudson.org,Global
 - DOMAIN-SUFFIX,huobi.pro,Global
+- DOMAIN-SUFFIX,ifixit.com,Global
 - DOMAIN-SUFFIX,initiummall.com,Global
 - DOMAIN-SUFFIX,ipfs.io,Global
 - DOMAIN-SUFFIX,issuu.com,Global
