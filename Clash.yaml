@@ -123,6 +123,7 @@ rules:
 - DOMAIN-SUFFIX,ediuschina.com,REJECT
 - DOMAIN-SUFFIX,flash.cn,REJECT
 - DOMAIN-SUFFIX,flstudiochina.com,REJECT
+- DOMAIN-SUFFIX,folxchina.cn,REJECT
 - DOMAIN-SUFFIX,formysql.com,REJECT
 - DOMAIN-SUFFIX,guitarpro.cc,REJECT
 - DOMAIN-SUFFIX,huishenghuiying.com.cn,REJECT
