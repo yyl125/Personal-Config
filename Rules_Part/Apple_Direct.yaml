@@ -1,3 +1,4 @@
+payload:
 - DOMAIN-SUFFIX,com.apple.appstored*,DIRECT,force-remote-dns
 - DOMAIN-SUFFIX,AppStore*,DIRECT,force-remote-dns
 - DOMAIN-SUFFIX,mzstatic.com,DIRECT,force-remote-dns
