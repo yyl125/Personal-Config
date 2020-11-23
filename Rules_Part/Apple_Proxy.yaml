@@ -1,3 +1,4 @@
+payload:
 - DOMAIN,safebrowsing.googleapis.com,Proxy
 - DOMAIN,developer.apple.com,Proxy
 - DOMAIN-SUFFIX,digicert.com,Proxy
