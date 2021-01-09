@@ -251,9 +251,12 @@ rules:
 # Fuck CJ Marketing
 
 - DOMAIN-SUFFIX,4009997658.com,REJECT
+- DOMAIN-SUFFIX,6xigema.com,REJECT
 - DOMAIN-SUFFIX,abbyychina.com,REJECT
+- DOMAIN-SUFFIX,alienskins.cn,REJECT
 - DOMAIN-SUFFIX,bartender.cc,REJECT
 - DOMAIN-SUFFIX,betterzip.net,REJECT
+- DOMAIN-SUFFIX,betterzipchina.com,REJECT
 - DOMAIN-SUFFIX,betterzipcn.com,REJECT
 - DOMAIN-SUFFIX,beyondcompare.cc,REJECT
 - DOMAIN-SUFFIX,bingdianhuanyuan.cn,REJECT
@@ -263,6 +266,7 @@ rules:
 - DOMAIN-SUFFIX,codesoftchina.com,REJECT
 - DOMAIN-SUFFIX,coreldrawchina.com,REJECT
 - DOMAIN-SUFFIX,crossoverchina.com,REJECT
+- DOMAIN-SUFFIX,crossoverchina.cn,REJECT
 - DOMAIN-SUFFIX,dongmansoft.com,REJECT
 - DOMAIN-SUFFIX,earmasterchina.cn,REJECT
 - DOMAIN-SUFFIX,easyrecoverychina.com,REJECT
@@ -271,10 +275,14 @@ rules:
 - DOMAIN-SUFFIX,flstudiochina.com,REJECT
 - DOMAIN-SUFFIX,folxchina.cn,REJECT
 - DOMAIN-SUFFIX,formysql.com,REJECT
+- DOMAIN-SUFFIX,goldwavechina.cn,REJECT
+- DOMAIN-SUFFIX,goldwavechina.com.cn,REJECT
+- DOMAIN-SUFFIX,goldwavechina.net,REJECT
 - DOMAIN-SUFFIX,guitarpro.cc,REJECT
 - DOMAIN-SUFFIX,huishenghuiying.com.cn,REJECT
 - DOMAIN-SUFFIX,hypersnap.net,REJECT
 - DOMAIN-SUFFIX,iconworkshop.cn,REJECT
+- DOMAIN-SUFFIX,iconworkshop.com.cn,REJECT
 - DOMAIN-SUFFIX,imindmap.cc,REJECT
 - DOMAIN-SUFFIX,jihehuaban.com.cn,REJECT
 - DOMAIN-SUFFIX,keyshot.cc,REJECT
@@ -290,25 +298,33 @@ rules:
 - DOMAIN-SUFFIX,mathtype.cn,REJECT
 - DOMAIN-SUFFIX,mindmanager.cc,REJECT
 - DOMAIN-SUFFIX,mindmanager.cn,REJECT
+- DOMAIN-SUFFIX,mindmanagerchina.cn,REJECT
+- DOMAIN-SUFFIX,mindmanagercn.com,REJECT
 - DOMAIN-SUFFIX,mindmapper.cc,REJECT
 - DOMAIN-SUFFIX,mycleanmymac.com,REJECT
 - DOMAIN-SUFFIX,nicelabel.cc,REJECT
 - DOMAIN-SUFFIX,ntfsformac.cc,REJECT
 - DOMAIN-SUFFIX,ntfsformac.cn,REJECT
 - DOMAIN-SUFFIX,overturechina.com,REJECT
+- DOMAIN-SUFFIX,overturechina.cn,REJECT
 - DOMAIN-SUFFIX,passwordrecovery.cn,REJECT
 - DOMAIN-SUFFIX,pdfexpert.cc,REJECT
 - DOMAIN-SUFFIX,photozoomchina.com,REJECT
+- DOMAIN-SUFFIX,photozoomchina.cn,REJECT
+- DOMAIN-SUFFIX,photozoomchina.net,REJECT
 - DOMAIN-SUFFIX,shankejingling.com,REJECT
 - DOMAIN-SUFFIX,ultraiso.net,REJECT
 - DOMAIN-SUFFIX,vegaschina.cn,REJECT
 - DOMAIN-SUFFIX,xitongqingli.com,REJECT
+- DOMAIN-SUFFIX,xitongqingli.cn,REJECT
+- DOMAIN-SUFFIX,xiuturuanjian.cn,REJECT
 - DOMAIN-SUFFIX,xmindchina.net,REJECT
 - DOMAIN-SUFFIX,xshellcn.com,REJECT
 - DOMAIN-SUFFIX,yihuifu.cn,REJECT
 - DOMAIN-SUFFIX,yuanchengxiezuo.com,REJECT
 - DOMAIN-SUFFIX,zbrushcn.com,REJECT
 - DOMAIN-SUFFIX,zhzzx.com,REJECT
+- DOMAIN-SUFFIX,zuoqudashi.net,REJECT
 
 # AD Site
 
