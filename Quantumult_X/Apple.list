@@ -1,16 +1,16 @@
 # Apple
 DOMAIN,safebrowsing.urlsec.qq.com,REJECT
-DOMAIN,safebrowsing.googleapis.com,Proxy
-DOMAIN,developer.apple.com,Proxy
-DOMAIN-SUFFIX,digicert.com,Proxy
-DOMAIN,ocsp.apple.com,Proxy
-DOMAIN,ocsp.sectigo.com,Proxy
-DOMAIN,ocsp.verisign.net,Proxy
-DOMAIN-SUFFIX,apple-dns.net,Proxy
-DOMAIN,testflight.apple.com,Proxy
-DOMAIN,sandbox.itunes.apple.com,Proxy
-DOMAIN,itunes.apple.com,Proxy
-DOMAIN-SUFFIX,blobstore.apple.com,Proxy
+DOMAIN,safebrowsing.googleapis.com,PROXY
+DOMAIN,developer.apple.com,PROXY
+DOMAIN-SUFFIX,digicert.com,PROXY
+DOMAIN,ocsp.apple.com,PROXY
+DOMAIN,ocsp.sectigo.com,PROXY
+DOMAIN,ocsp.verisign.net,PROXY
+DOMAIN-SUFFIX,apple-dns.net,PROXY
+DOMAIN,testflight.apple.com,PROXY
+DOMAIN,sandbox.itunes.apple.com,PROXY
+DOMAIN,itunes.apple.com,PROXY
+DOMAIN-SUFFIX,blobstore.apple.com,PROXY
 DOMAIN-SUFFIX,apps.apple.com,DIRECT
 DOMAIN,cvws.icloud-content.com,DIRECT
 DOMAIN-SUFFIX,mzstatic.com,DIRECT
