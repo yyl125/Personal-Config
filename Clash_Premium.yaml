@@ -135,8 +135,6 @@ dns:
     - '+.music.tc.qq.com'
     - 'aqqmusic.tc.qq.com'
     - '+.stream.qqmusic.qq.com'
-    ## Xiami
-    - '*.xiami.com'
     ## Migu
     - '+.music.migu.cn'
     # === Game Service ===
@@ -161,6 +159,7 @@ dns:
   # Clash 会使用最先获得的解析记录回复 DNS 请求
   nameserver:
     - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
 
   # 当 fallback 参数被配置时, DNS 请求将同时发送至上方 nameserver 列表和下方 fallback 列表中配置的所有 DNS 服务器.
   # 当解析得到的 IP 地址的地理位置不是 CN 时，clash 将会选用 fallback 中 DNS 服务器的解析结果。
@@ -208,6 +207,23 @@ proxies:
 
 proxy-groups:
 # url-test 可以自动选择与指定 URL 测速后，延迟最短的服务器
+- 
+  name: Proxy
+  type: select
+  proxies:
+    - 'DIRECT'
+    - 'Proxy'
+  name: Domestic
+  type: select
+  proxies:
+    - 'DIRECT'
+    - 'Proxy'
+-
+  name: Others
+  type: select
+  proxies:
+    - 'DIRECT'
+    - 'Proxy'
 
 rules:
 
@@ -378,6 +394,10 @@ rules:
 - DOMAIN-KEYWORD,XLLiveUD,DIRECT
 - DOMAIN-KEYWORD,utorrent,DIRECT
 
+# Bank
+
+- DOMAIN-SUFFIX,cebbank.com,DIRECT
+
 # ProxyTV
 
 # ABC
@@ -475,8 +495,8 @@ rules:
 
 # Netflix
 
-- DOMAIN-KEYWORD,netflix,Proxy
 - DOMAIN-KEYWORD,nflx,Proxy
+- DOMAIN-KEYWORD,netflix,Proxy
 - DOMAIN-SUFFIX,netflix.com,Proxy
 - DOMAIN-SUFFIX,netflix.net,Proxy
 - DOMAIN-SUFFIX,nflxext.com,Proxy
@@ -493,6 +513,10 @@ rules:
 - DOMAIN-SUFFIX,bamgrid.com,Proxy
 - DOMAIN-SUFFIX,dssott.com,Proxy
 - DOMAIN,cdn.registerdisney.go.com,Proxy
+
+# Viu.tv
+
+- DOMAIN-SUFFIX,viu,Proxy
 
 # Pandora
 
@@ -602,6 +626,8 @@ rules:
 
 - DOMAIN-SUFFIX,alibaba.com,DIRECT
 - DOMAIN-SUFFIX,alicdn.com,DIRECT
+- DOMAIN-SUFFIX,aliyuncs.com,DIRECT
+- DOMAIN-SUFFIX,aliyundrive.com,DIRECT
 - DOMAIN-SUFFIX,amap.com,DIRECT
 - DOMAIN-SUFFIX,dingtalk.com,DIRECT
 - DOMAIN-SUFFIX,taobao.com,DIRECT
@@ -1442,7 +1468,6 @@ rules:
 - DOMAIN-SUFFIX,ytimg.com,Proxy,force-remote-dns
 
 # IQIYI
-
 - IP-CIDR,101.227.0.0/16,DIRECT
 - IP-CIDR,101.224.0.0/13,DIRECT
 - IP-CIDR,119.176.0.0/12,DIRECT
