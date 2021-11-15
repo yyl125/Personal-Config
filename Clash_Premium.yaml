@@ -394,9 +394,11 @@ rules:
 - DOMAIN-KEYWORD,XLLiveUD,DIRECT
 - DOMAIN-KEYWORD,utorrent,DIRECT
 
-# Bank
+# Personal
 
-- DOMAIN-SUFFIX,cebbank.com,DIRECT
+# Hefei Metro
+
+- DOMAIN-SUFFIX,hfgdjt.cn,DIRECT
 
 # ProxyTV
 
@@ -761,6 +763,7 @@ rules:
 - DOMAIN-SUFFIX,cailianpress.com,DIRECT
 - DOMAIN-SUFFIX,chdbits.co,DIRECT
 - DOMAIN-SUFFIX,chushou.tv,DIRECT
+- DOMAIN-SUFFIX,cebbank.com,DIRECT
 - DOMAIN-SUFFIX,cmbchina.com,DIRECT
 - DOMAIN-SUFFIX,cmbimg.com,DIRECT
 - DOMAIN-SUFFIX,cmct.tv,DIRECT
