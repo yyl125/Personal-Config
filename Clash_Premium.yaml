@@ -269,6 +269,8 @@ rules:
 - DOMAIN,testflight.apple.com,Proxy
 - DOMAIN,sandbox.itunes.apple.com,Proxy
 - DOMAIN,itunes.apple.com,Proxy
+- DOMAIN,bookkeeper.itunes.apple.com,Proxy
+- DOMAIN,amp-api.podcasts.apple.com,Proxy
 - DOMAIN-SUFFIX,blobstore.apple.com,Proxy
 - DOMAIN-SUFFIX,apps.apple.com,DIRECT
 - DOMAIN,cvws.icloud-content.com,DIRECT
