@@ -56,11 +56,11 @@ hosts:
 # '.dev': 127.0.0.1
 # 'alpha.clash.dev': '::1'
 
-# DNS 服务器配置(可选；若不配置，程序内置的 DNS 服务会被关闭)
+# DNS 服务器配置 (可选；若不配置，程序内置的 DNS 服务会被关闭)
 dns:
   enable: true
   listen: 0.0.0.0:53
-  ipv6: true # 当此选项为 false 时, AAAA 请求将返回空
+  ipv6: true # 当此选项为 false 时，AAAA 请求将返回空
 
   # 以下填写的 DNS 服务器将会被用来解析 DNS 服务的域名
   # 仅填写 DNS 服务器的 IP 地址
@@ -173,7 +173,7 @@ dns:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
 
-  # 当 fallback 参数被配置时, DNS 请求将同时发送至上方 nameserver 列表和下方 fallback 列表中配置的所有 DNS 服务器.
+  # 当 fallback 参数被配置时，DNS 请求将同时发送至上方 nameserver 列表和下方 fallback 列表中配置的所有 DNS 服务器。
   # 当解析得到的 IP 地址的地理位置不是 CN 时，clash 将会选用 fallback 中 DNS 服务器的解析结果。
   # fallback:
   #   - https://dns.google/dns-query
@@ -239,8 +239,7 @@ proxy-groups:
   name: Proxy
   type: select
   proxies:
-    - "
-    - "
+    - 'Proxy'
 -
   name: Domestic
   type: select
@@ -263,37 +262,226 @@ rules:
 - DOMAIN,developer.apple.com,Proxy
 - DOMAIN-SUFFIX,digicert.com,Proxy
 - DOMAIN,ocsp.apple.com,Proxy
+- DOMAIN,ocsp2.apple.com,Proxy
 - DOMAIN,ocsp.sectigo.com,Proxy
 - DOMAIN,ocsp.verisign.net,Proxy
 - DOMAIN-SUFFIX,apple-dns.net,Proxy
 - DOMAIN,testflight.apple.com,Proxy
 - DOMAIN,sandbox.itunes.apple.com,Proxy
 - DOMAIN,itunes.apple.com,Proxy
-- DOMAIN,bookkeeper.itunes.apple.com,Proxy
-- DOMAIN,amp-api.podcasts.apple.com,Proxy
+- DOMAIN-SUFFIX,apps.apple.com,Proxy
 - DOMAIN-SUFFIX,blobstore.apple.com,Proxy
-- DOMAIN-SUFFIX,apps.apple.com,DIRECT
-- DOMAIN,cvws.icloud-content.com,DIRECT
+- DOMAIN,cvws.icloud-content.com,Proxy
 - DOMAIN-SUFFIX,mzstatic.com,DIRECT
-- DOMAIN-SUFFIX,itunes.apple.com,DIRECT
 - DOMAIN-SUFFIX,icloud.com,DIRECT
 - DOMAIN-SUFFIX,icloud-content.com,DIRECT
+- DOMAIN,bookkeeper.itunes.apple.com,Proxy
+- DOMAIN,amp-api.podcasts.apple.com,Proxy
+- DOMAIN-SUFFIX,push.apple.com,Proxy
+- DOMAIN-SUFFIX,guzzoni.apple.com,Proxy
+- DOMAIN-SUFFIX,smoot.apple.com,Proxy
+- DOMAIN-SUFFIX,itunes.apple.com,DIRECT
+- DOMAIN-SUFFIX,gateway.icloud.com,DIRECT
+- DOMAIN-SUFFIX,gateway.icloud.com.cn,DIRECT
+- DOMAIN-SUFFIX,itunes.apple.com,DIRECT
 - DOMAIN-SUFFIX,me.com,DIRECT
 - DOMAIN-SUFFIX,aaplimg.com,DIRECT
+- DOMAIN,updates-http.cdn-apple.com,DIRECT
+- DOMAIN,updates.cdn-apple.com,DIRECT
 - DOMAIN-SUFFIX,cdn20.com,DIRECT
 - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+- DOMAIN,bpapi.apple.com,DIRECT
 - DOMAIN-SUFFIX,akadns.net,DIRECT
 - DOMAIN-SUFFIX,akamaiedge.net,DIRECT
 - DOMAIN-SUFFIX,edgekey.net,DIRECT
 - DOMAIN-SUFFIX,mwcloudcdn.com,DIRECT
 - DOMAIN-SUFFIX,mwcname.com,DIRECT
-- DOMAIN-SUFFIX,akamaiedge.net,DIRECT
-- DOMAIN-SUFFIX,cdn-apple.com,DIRECT
-- DOMAIN-SUFFIX,aaplimg.com,DIRECT
 - DOMAIN-SUFFIX,apple.com,DIRECT
 - DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
 - DOMAIN-SUFFIX,apple-mapkit.com,DIRECT
-#DOMAIN,e.crashlytics.com,REJECT //注释此选项有助于大多数App开发者分析崩溃信息；如果您拒绝一切崩溃数据统计、搜集，请取消注释
+- PROCESS-NAME,LookupViewService,Proxy
+- PROCESS-NAME,/System/Library/PrivateFrameworks/Lookup.framework/Versions/A/XPCServices/LookupViewService.xpc/Contents/MacOS/LookupViewService,Proxy
+- DOMAIN,lookup-api.apple.com,Proxy
+- DOMAIN,lookup-api.apple.com.edgekey.net,Proxy
+- DOMAIN,e16991.b.akamaiedge.net,Proxy
+#DOMAIN,e.crashlytics.com,REJECT //注释此选项有助于大多数 App 开发者分析崩溃信息；如果您拒绝一切崩溃数据统计、搜集，请取消注释
+
+# Cult & Politics
+
+- DOMAIN-KEYWORD,dafahao,REJECT
+- DOMAIN-KEYWORD,minghui,REJECT
+- DOMAIN-KEYWORD,dongtaiwang,REJECT
+- DOMAIN-KEYWORD,epochtimes,REJECT
+- DOMAIN-KEYWORD,ntdtv,REJECT
+- DOMAIN-KEYWORD,falundafa,REJECT
+- DOMAIN-KEYWORD,wujieliulan,REJECT
+- DOMAIN-KEYWORD,zhengjian,REJECT
+- DOMAIN-KEYWORD,pincong,REJECT
+
+# Torrent & Bittorrent
+
+- DOMAIN-SUFFIX,torrentmac.net,Proxy
+- DOMAIN-KEYWORD,torrent,DIRECT
+- DOMAIN-KEYWORD,bittorrent,DIRECT
+- DOMAIN-KEYWORD,xunlei,DIRECT
+- DOMAIN-KEYWORD,sandai,DIRECT
+- DOMAIN-KEYWORD,Thunder,DIRECT
+- DOMAIN-KEYWORD,XLLiveUD,DIRECT
+- DOMAIN-KEYWORD,utorrent,DIRECT
+- DOMAIN-SUFFIX,00cdn.com,DIRECT
+- DOMAIN-SUFFIX,155.com,DIRECT
+- DOMAIN-SUFFIX,2sonar.com,DIRECT
+- DOMAIN-SUFFIX,88cdn.com,DIRECT
+- DOMAIN-SUFFIX,8uri.cn,DIRECT
+- DOMAIN-SUFFIX,falconalliance.cn,DIRECT
+- DOMAIN-SUFFIX,fontong.com,DIRECT
+- DOMAIN-SUFFIX,geilijiasu.com,DIRECT
+- DOMAIN-SUFFIX,geilijiasu.net,DIRECT
+- DOMAIN-SUFFIX,gigaget.com,DIRECT
+- DOMAIN-SUFFIX,kanimg.com,DIRECT
+- DOMAIN-SUFFIX,kankan.com,DIRECT
+- DOMAIN-SUFFIX,kuaipan.cn,DIRECT
+- DOMAIN-SUFFIX,n0808.com,DIRECT
+- DOMAIN-SUFFIX,neoimaging.cn,DIRECT
+- DOMAIN-SUFFIX,newvr.com,DIRECT
+- DOMAIN-SUFFIX,p2cdn.com,DIRECT
+- DOMAIN-SUFFIX,sandai.net,DIRECT
+- DOMAIN-SUFFIX,sjzhushou.com,DIRECT
+- DOMAIN-SUFFIX,szxlxzb.com,DIRECT
+- DOMAIN-SUFFIX,thundercdn.com,DIRECT
+- DOMAIN-SUFFIX,thunderurl.com,DIRECT
+- DOMAIN-SUFFIX,xbase.cloud,DIRECT
+- DOMAIN-SUFFIX,xbase.xyz,DIRECT
+- DOMAIN-SUFFIX,xcloudbase.com,DIRECT
+- DOMAIN-SUFFIX,xlisp.net,DIRECT
+- DOMAIN-SUFFIX,xlpan.com,DIRECT
+- DOMAIN-SUFFIX,xlyouxi.net,DIRECT
+- DOMAIN-SUFFIX,xunlei.cn,DIRECT
+- DOMAIN-SUFFIX,xunlei.com,DIRECT
+- DOMAIN-SUFFIX,xunlei.net,DIRECT
+
+# PixelExperienceROM
+
+- DOMAIN-SUFFIX,pixelexperience.org,Proxy
+
+# Software
+# Hefei Metro
+
+- DOMAIN-KEYWORD,hfgdjt,DIRECT
+- DOMAIN-SUFFIX,hfgdjt.com,DIRECT
+- DOMAIN-SUFFIX,hfgdjt.cn,DIRECT
+
+# VMWare
+
+- DOMAIN-SUFFIX,vmware.com,DIRECT
+
+# tzfile
+
+- DOMAIN,t-rex.tzfile.com,DIRECT
+
+# Geekbench
+
+- DOMAIN-SUFFIX,geekbench.com,DIRECT
+
+# QNAP
+
+- DOMAIN-KEYWORD,myqnapcloud,DIRECT
+
+# GoodSync
+
+- DOMAIN-KEYWORD,goodsync,DIRECT
+- DOMAIN-SUFFIX,goodsync.com,DIRECT
+
+# Google Voice
+
+- DOMAIN,voice.telephony.goog,Google Voice
+- IP-CIDR,74.125.39.0/24,Google Voice
+
+# OpenAI & ChatGPT
+
+- DOMAIN-SUFFIX,openai.com,ChatGPT
+- DOMAIN-KEYWORD,openai,ChatGPT
+- DOMAIN-SUFFIX,sentry.io,ChatGPT
+- DOMAIN-SUFFIX,pay.openai.com,ChatGPT
+- DOMAIN-SUFFIX,identrust.com,ChatGPT
+- DOMAIN,openaiapi-site.azureedge.net,ChatGPT
+- DOMAIN-SUFFIX,chat.openai.com,ChatGPT
+- DOMAIN-SUFFIX,challenges.cloudflare.com,ChatGPT
+- DOMAIN-SUFFIX,auth0.openai.com,ChatGPT
+- DOMAIN-SUFFIX,platform.openai.com,ChatGPT
+
+# MoonFM
+
+- DOMAIN-SUFFIX,moon.fm,Proxy
+
+# Kindle
+
+- DOMAIN-SUFFIX,amazon.cn,DIRECT
+- DOMAIN-SUFFIX,amazonaws.com,DIRECT
+
+# SyncPlayer
+
+- DOMAIN-SUFFIX,movie.douban.com,DIRECT
+- DOMAIN-SUFFIX,mddcloud.com.cn,DIRECT
+- DOMAIN-SUFFIX,aliyundrive.asia,DIRECT
+- DOMAIN-SUFFIX,ddys.info,DIRECT
+- DOMAIN-SUFFIX,ddys.wiki,DIRECT
+- DOMAIN-SUFFIX,ddys.pro,DIRECT
+- DOMAIN-SUFFIX,ddys.mov,DIRECT
+- DOMAIN-SUFFIX,ddys.art,DIRECT
+- DOMAIN-SUFFIX,zh188.net,DIRECT
+- DOMAIN-SUFFIX,cz.cz01.site,DIRECT
+- DOMAIN-SUFFIX,kczybf.com,DIRECT
+- DOMAIN-SUFFIX,mixpanel.com,DIRECT
+- DOMAIN-SUFFIX,appsflyer.com,DIRECT
+- DOMAIN-SUFFIX,tv.apple.com,DIRECT
+- DOMAIN-SUFFIX,ctyunxs.cn,DIRECT
+- DOMAIN-SUFFIX,hls.aoxtv.com,DIRECT
+- DOMAIN-KEYWORD,ffzy-play,DIRECT
+- DOMAIN-KEYWORD,bfzycdn.com,DIRECT
+- DOMAIN-KEYWORD,lzcdn,DIRECT
+- DOMAIN-KEYWORD,v.cdnlz,DIRECT
+- DOMAIN-KEYWORD,lz-cdn,DIRECT
+- DOMAIN-KEYWORD,default.akamaized.net,DIRECT
+- DOMAIN-KEYWORD,vip.ffzy-online,DIRECT
+- DOMAIN-KEYWORD,vip.ffzy-play,DIRECT
+- DOMAIN-KEYWORD,ffzyread,DIRECT
+- DOMAIN-SUFFIX,kuaikan-api.com,DIRECT
+- DOMAIN-SUFFIX,czzy88.com,DIRECT
+- DOMAIN-SUFFIX,czzy22.com,DIRECT
+- DOMAIN-SUFFIX,czzy66.com,DIRECT
+- DOMAIN-SUFFIX,CZZ9.COM,DIRECT
+- DOMAIN-SUFFIX,v1.ax,DIRECT
+- IP-CIDR,216.180.0.0/16,DIRECT
+- IP-CIDR,103.160.204.120/32,DIRECT
+- IP-CIDR,138.199.9.104/32,DIRECT
+- DOMAIN-SUFFIX,wogg.link,DIRECT
+- DOMAIN-SUFFIX,xxooo.cf,DIRECT
+- DOMAIN-SUFFIX,wogg.xyz,DIRECT
+- DOMAIN-SUFFIX,pstatp.com,DIRECT
+- DOMAIN-KEYWORD,tt.cuc.myqcloud.com.cn,DIRECT
+- DOMAIN-SUFFIX,v1.mk,Proxy
+- DOMAIN-SUFFIX,notion-api.splitbee.io,Proxy
+- DOMAIN-SUFFIX,themoviedb.org,Proxy
+- DOMAIN-SUFFIX,thetvdb.com,Proxy
+- DOMAIN-SUFFIX,tmdb.org,Proxy
+- DOMAIN-SUFFIX,discord.com,Proxy
+- DOMAIN-SUFFIX,olevod.com,Proxy
+- DOMAIN-SUFFIX,olevod.tv,Proxy
+- DOMAIN-SUFFIX,olemovienews.com,Proxy
+- DOMAIN-SUFFIX,haiwaikan.com,Proxy
+- DOMAIN-SUFFIX,bfvvs.com,Proxy
+- DOMAIN-SUFFIX,cdn.venus7202.com,Proxy
+- DOMAIN-SUFFIX,cdn.ceres9350.com,Proxy
+- DOMAIN-SUFFIX,cdn.efhie.com,Proxy
+- DOMAIN-SUFFIX,czzy.site,Proxy
+- DOMAIN-SUFFIX,cz01.vip,Proxy
+- DOMAIN-SUFFIX,picsum.photos,Proxy
+- DOMAIN-SUFFIX,ibb.co,Proxy
+- DOMAIN-SUFFIX,kin6c1.com,Proxy
+- DOMAIN-SUFFIX,iz8qkg.com,Proxy
+- DOMAIN-SUFFIX,v82u1l.com,Proxy
+- DOMAIN-SUFFIX,ikzybf.com,Proxy
 
 # Fuck CJ Marketing
 
@@ -373,69 +561,192 @@ rules:
 - DOMAIN-SUFFIX,zhzzx.com,REJECT
 - DOMAIN-SUFFIX,zuoqudashi.net,REJECT
 
+# MIUI AD
+# - DOMAIN-SUFFIX,ad.mi.com,MIUI
+# - DOMAIN-SUFFIX,ad.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,ad1.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,appstore.cdn.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,appstore.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,api.ad.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,ad.doubleclick.net,MIUI
+# - DOMAIN-SUFFIX,bss.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,b.netcheck.gallery.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,broker.mqtt.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,config.kuyun.com,MIUI
+# - DOMAIN-SUFFIX,dvb.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,de.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,data.mistat.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,f1.market.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,f2.market.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,f3.market.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,f4.market.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,f5.market.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,f1.market.mi-img.com,MIUI
+# - DOMAIN-SUFFIX,f2.market.mi-img.com,MIUI
+# - DOMAIN-SUFFIX,f3.market.mi-img.com,MIUI
+# - DOMAIN-SUFFIX,f4.market.mi-img.com,MIUI
+# - DOMAIN-SUFFIX,f5.market.mi-img.com,MIUI
+# - DOMAIN-SUFFIX,file.xmpush.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,gvod.aiseejapp.atianqi.com,MIUI
+# - DOMAIN-SUFFIX,g.dtv.cn.miaozhan.com,MIUI
+# - DOMAIN-SUFFIX,gallery.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,jellyfish.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,logonext.tv.kuyun.com,MIUI
+# - DOMAIN-SUFFIX,mishop.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,milink.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,misc.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,mitv.tracking.miui.com,MIUI
+# - DOMAIN-SUFFIX,metok.sys.miui.com,MIUI
+# - DOMAIN-SUFFIX,new.api.ad.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,pandora.mi.com,MIUI
+# - DOMAIN-SUFFIX,redirect.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,register.xmpush.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,resolver.msg.xiaomi.net,MIUI
+# - DOMAIN-SUFFIX,r.browser.miui.com,MIUI
+# - DOMAIN-SUFFIX,stat.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,sdkconfig.ad.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,staging.ai.api.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,tracking.miui.com,MIUI
+# - DOMAIN-SUFFIX,tv.weixin.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,tvmanager.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,tvmgr.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,tat.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,t7z.cupid.ptqy.gitv.tv,MIUI
+# - DOMAIN-SUFFIX,upgrade.mishop.pandora.xiaomi.com,MIUI
+# - DOMAIN-SUFFIX,v.admaster.com.cn,MIUI
+
 # AD Site
 
-- DOMAIN-KEYWORD,admarvel,REJECT
-- DOMAIN-KEYWORD,admaster,REJECT
-- DOMAIN-KEYWORD,adsage,REJECT
-- DOMAIN-KEYWORD,adsmogo,REJECT
-- DOMAIN-KEYWORD,adsrvmedia,REJECT
-- DOMAIN-KEYWORD,adwords,REJECT
-- DOMAIN-KEYWORD,adservice,REJECT
-- DOMAIN-SUFFIX,appsflyer.com,REJECT
-- DOMAIN-KEYWORD,domob,REJECT
-- DOMAIN-SUFFIX,doubleclick.net,REJECT
-- DOMAIN-KEYWORD,duomeng,REJECT
-- DOMAIN-KEYWORD,dwtrack,REJECT
-- DOMAIN-KEYWORD,guanggao,REJECT
-- DOMAIN-KEYWORD,lianmeng,REJECT
-- DOMAIN-SUFFIX,mmstat.com,REJECT
-- DOMAIN-KEYWORD,mopub,REJECT
-- DOMAIN-KEYWORD,omgmta,REJECT
-- DOMAIN-KEYWORD,openx,REJECT
-- DOMAIN-KEYWORD,partnerad,REJECT
-- DOMAIN-KEYWORD,pingfore,REJECT
-- DOMAIN-KEYWORD,supersonicads,REJECT
-- DOMAIN-KEYWORD,uedas,REJECT
-- DOMAIN-KEYWORD,umeng,REJECT
-- DOMAIN-KEYWORD,usage,REJECT
-- DOMAIN-SUFFIX,vungle.com,REJECT
-- DOMAIN-KEYWORD,wlmonitor,REJECT
-- DOMAIN-KEYWORD,zjtoolbar,REJECT
+# - DOMAIN-KEYWORD,admarvel,REJECT
+# - DOMAIN-KEYWORD,admaster,REJECT
+# - DOMAIN-KEYWORD,adsage,REJECT
+# - DOMAIN-KEYWORD,adsmogo,REJECT
+# - DOMAIN-KEYWORD,adsrvmedia,REJECT
+# - DOMAIN-KEYWORD,adwords,REJECT
+# - DOMAIN-KEYWORD,adservice,REJECT
+# - DOMAIN-SUFFIX,appsflyer.com,REJECT
+# - DOMAIN-KEYWORD,domob,REJECT
+# - DOMAIN-SUFFIX,doubleclick.net,REJECT
+# - DOMAIN-KEYWORD,duomeng,REJECT
+# - DOMAIN-KEYWORD,dwtrack,REJECT
+# - DOMAIN-KEYWORD,guanggao,REJECT
+# - DOMAIN-KEYWORD,lianmeng,REJECT
+# - DOMAIN-SUFFIX,mmstat.com,REJECT
+# - DOMAIN-KEYWORD,mopub,REJECT
+# - DOMAIN-KEYWORD,omgmta,REJECT
+# - DOMAIN-KEYWORD,openx,REJECT
+# - DOMAIN-KEYWORD,partnerad,REJECT
+# - DOMAIN-KEYWORD,pingfore,REJECT
+# - DOMAIN-KEYWORD,supersonicads,REJECT
+# - DOMAIN-KEYWORD,uedas,REJECT
+# - DOMAIN-KEYWORD,umeng,REJECT
+# - DOMAIN-KEYWORD,usage,REJECT
+# - DOMAIN-SUFFIX,vungle.com,REJECT
+# - DOMAIN-KEYWORD,wlmonitor,REJECT
+# - DOMAIN-KEYWORD,zjtoolbar,REJECT
+# - DOMAIN-SUFFIX,50union.com,REJECT
+# - DOMAIN-SUFFIX,activity.baidu.com,REJECT
+# - DOMAIN-SUFFIX,cd.xdplt.com,REJECT
+# - DOMAIN-SUFFIX,cdn.polyfill.io,REJECT
+# - DOMAIN-SUFFIX,cdn-go.cn,REJECT
+# - DOMAIN-SUFFIX,config.cmpassport.com,REJECT
+# - DOMAIN-SUFFIX,dl.txcdns.com,REJECT
+# - DOMAIN-SUFFIX,dnet.mb.qq.com,REJECT
+# - DOMAIN-SUFFIX,ext.baidu.com,REJECT
+# - DOMAIN-SUFFIX,fxgate.baidu.com,REJECT
+# - DOMAIN-SUFFIX,game.weixin.qq.com,REJECT
+# - DOMAIN-SUFFIX,haoma.baidu.com,REJECT
+# - DOMAIN-SUFFIX,linkh5.xyz,REJECT
+# - DOMAIN-SUFFIX,loggw.alipay.com,REJECT
+# - DOMAIN-SUFFIX,mime.baidu.com,REJECT
+# - DOMAIN-SUFFIX,mum.m.alibaba.com,REJECT
+# - DOMAIN-SUFFIX,pae.baidu.com,REJECT
+# - DOMAIN-SUFFIX,pcrec.baidu.com,REJECT
+# - DOMAIN-SUFFIX,sepro.baidu.com,REJECT
+# - DOMAIN-SUFFIX,suggestion.baidu.com,REJECT
+# - DOMAIN-SUFFIX,tmfsdktcpv4.m.qq.com,REJECT
+# - DOMAIN-SUFFIX,udpolimeok.baidu.com,REJECT
+# - DOMAIN-SUFFIX,udpolimenew.baidu.com,REJECT
+# - DOMAIN-SUFFIX,usug.baidu.com,REJECT
+# - DOMAIN-SUFFIX,wts.xinwen.cn,REJECT
+# - DOMAIN-SUFFIX,yun-hl.3g.qq.com,REJECT
+# - DOMAIN-SUFFIX,cmpassport.com,REJECT
+# - DOMAIN-SUFFIX,hmrz.wo.cn,REJECT
+# - DOMAIN-SUFFIX,e.189.cn,REJECT
+# - DOMAIN-SUFFIX,id6.me,REJECT
+# - DOMAIN-SUFFIX,opencloud.wostore.cn,REJECT
+# - DOMAIN-SUFFIX,auth.wosms.cn,REJECT
+# - DOMAIN-SUFFIX,id.mail.wo.cn,REJECT
 
-# Cult & Politics
+# Speedtest
 
-- DOMAIN-KEYWORD,dafahao,REJECT
-- DOMAIN-KEYWORD,minghui,REJECT
-- DOMAIN-KEYWORD,dongtaiwang,REJECT
-- DOMAIN-KEYWORD,epochtimes,REJECT
-- DOMAIN-KEYWORD,ntdtv,REJECT
-- DOMAIN-KEYWORD,falundafa,REJECT
-- DOMAIN-KEYWORD,wujieliulan,REJECT
-- DOMAIN-KEYWORD,zhengjian,REJECT
-- DOMAIN-KEYWORD,pincong,REJECT
+- DOMAIN-SUFFIX,ooklaserver.net,DIRECT
+- DOMAIN-SUFFIX,speedtest.net,DIRECT
 
-# Torrent & Bittorrent
+# Nvidia
 
-- DOMAIN-KEYWORD,torrent,DIRECT
-- DOMAIN-KEYWORD,bittorrent,DIRECT
-- DOMAIN-KEYWORD,xunlei,DIRECT
-- DOMAIN-KEYWORD,sandai,DIRECT
-- DOMAIN-KEYWORD,Thunder,DIRECT
-- DOMAIN-KEYWORD,XLLiveUD,DIRECT
-- DOMAIN-KEYWORD,utorrent,DIRECT
-
-# Hefei Metro
-
-- DOMAIN-SUFFIX,hfgdjt.cn,DIRECT
-
-# QNAP
-
-- DOMAIN-KEYWORD,myqnapcloud,DIRECT
-
-# MoonFM
-
-- DOMAIN-SUFFIX,moon.fm,Proxy
+- DOMAIN-SUFFIX,geforce.cn,DIRECT
+- DOMAIN-SUFFIX,geforce.co.kr,DIRECT
+- DOMAIN-SUFFIX,geforce.co.uk,DIRECT
+- DOMAIN-SUFFIX,geforce.com,DIRECT
+- DOMAIN-SUFFIX,geforce.com.tw,DIRECT
+- DOMAIN-SUFFIX,gputechconf.cn,DIRECT
+- DOMAIN-SUFFIX,gputechconf.co.kr,DIRECT
+- DOMAIN-SUFFIX,gputechconf.com,DIRECT
+- DOMAIN-SUFFIX,gputechconf.com.au,DIRECT
+- DOMAIN-SUFFIX,gputechconf.com.tw,DIRECT
+- DOMAIN-SUFFIX,gputechconf.eu,DIRECT
+- DOMAIN-SUFFIX,gputechconf.in,DIRECT
+- DOMAIN-SUFFIX,gputechconf.jp,DIRECT
+- DOMAIN-SUFFIX,nvda.d2.sc.omtrdc.net,DIRECT
+- DOMAIN-SUFFIX,nvidia.asia,DIRECT
+- DOMAIN-SUFFIX,nvidia.at,DIRECT
+- DOMAIN-SUFFIX,nvidia.be,DIRECT
+- DOMAIN-SUFFIX,nvidia.ch,DIRECT
+- DOMAIN-SUFFIX,nvidia.cn,DIRECT
+- DOMAIN-SUFFIX,nvidia.co.at,DIRECT
+- DOMAIN-SUFFIX,nvidia.co.in,DIRECT
+- DOMAIN-SUFFIX,nvidia.co.jp,DIRECT
+- DOMAIN-SUFFIX,nvidia.co.kr,DIRECT
+- DOMAIN-SUFFIX,nvidia.co.uk,DIRECT
+- DOMAIN-SUFFIX,nvidia.com,DIRECT
+- DOMAIN-SUFFIX,nvidia.com.au,DIRECT
+- DOMAIN-SUFFIX,nvidia.com.br,DIRECT
+- DOMAIN-SUFFIX,nvidia.com.mx,DIRECT
+- DOMAIN-SUFFIX,nvidia.com.pe,DIRECT
+- DOMAIN-SUFFIX,nvidia.com.pl,DIRECT
+- DOMAIN-SUFFIX,nvidia.com.tr,DIRECT
+- DOMAIN-SUFFIX,nvidia.com.tw,DIRECT
+- DOMAIN-SUFFIX,nvidia.com.ua,DIRECT
+- DOMAIN-SUFFIX,nvidia.com.ve,DIRECT
+- DOMAIN-SUFFIX,nvidia.cz,DIRECT
+- DOMAIN-SUFFIX,nvidia.de,DIRECT
+- DOMAIN-SUFFIX,nvidia.dk,DIRECT
+- DOMAIN-SUFFIX,nvidia.es,DIRECT
+- DOMAIN-SUFFIX,nvidia.eu,DIRECT
+- DOMAIN-SUFFIX,nvidia.fi,DIRECT
+- DOMAIN-SUFFIX,nvidia.fr,DIRECT
+- DOMAIN-SUFFIX,nvidia.in,DIRECT
+- DOMAIN-SUFFIX,nvidia.it,DIRECT
+- DOMAIN-SUFFIX,nvidia.jp,DIRECT
+- DOMAIN-SUFFIX,nvidia.lu,DIRECT
+- DOMAIN-SUFFIX,nvidia.mx,DIRECT
+- DOMAIN-SUFFIX,nvidia.nl,DIRECT
+- DOMAIN-SUFFIX,nvidia.no,DIRECT
+- DOMAIN-SUFFIX,nvidia.pl,DIRECT
+- DOMAIN-SUFFIX,nvidia.ro,DIRECT
+- DOMAIN-SUFFIX,nvidia.ru,DIRECT
+- DOMAIN-SUFFIX,nvidia.se,DIRECT
+- DOMAIN-SUFFIX,nvidia.tt.omtrdc.net,DIRECT
+- DOMAIN-SUFFIX,nvidia.tw,DIRECT
+- DOMAIN-SUFFIX,nvidiaforhp.com,DIRECT
+- DOMAIN-SUFFIX,nvidiagrid.net,DIRECT
+- DOMAIN-SUFFIX,shotwithgeforce.com,DIRECT
+- DOMAIN-SUFFIX,tegrazone.co,DIRECT
+- DOMAIN-SUFFIX,tegrazone.co.kr,DIRECT
+- DOMAIN-SUFFIX,tegrazone.com,DIRECT
+- DOMAIN-SUFFIX,tegrazone.jp,DIRECT
+- DOMAIN-SUFFIX,tegrazone.kr,DIRECT
 
 # ProxyTV
 
@@ -452,13 +763,6 @@ rules:
 - DOMAIN-SUFFIX,akamaized.net,Proxy
 - DOMAIN-SUFFIX,ameba.jp,Proxy
 - DOMAIN-SUFFIX,hayabusa.io,Proxy
-
-# Amazon Prime Video
-
-- DOMAIN-SUFFIX,aiv-cdn.net,Proxy
-- DOMAIN-SUFFIX,amazonaws.com,Proxy
-- DOMAIN-SUFFIX,amazonvideo.com,Proxy
-- DOMAIN-SUFFIX,llnwd.net,Proxy
 
 # Bahamut
 
@@ -481,13 +785,6 @@ rules:
 
 - DOMAIN-SUFFIX,chocotv.com.tw,Proxy
 
-# Epicgames
-
-- DOMAIN-KEYWORD,epicgames,Proxy
-- DOMAIN-SUFFIX,helpshift.com,Proxy
-- DOMAIN-SUFFIX,paragon.com,Proxy
-- DOMAIN-SUFFIX,unrealengine.com,Proxy
-
 # Fox+
 
 - DOMAIN-KEYWORD,foxplus,Proxy
@@ -504,7 +801,7 @@ rules:
 - DOMAIN-SUFFIX,theplatform.com,Proxy
 - DOMAIN-SUFFIX,urlload.net,Proxy
 
-# HBO & HBO Go
+# HBO & HBO Go HKG
 
 - DOMAIN-SUFFIX,execute-api.ap-southeast-1.amazonaws.com,HBO
 - DOMAIN-SUFFIX,hbo.com,HBO
@@ -571,6 +868,26 @@ rules:
 - DOMAIN-SUFFIX,dssott.com,Disney+
 - DOMAIN,cdn.registerdisney.go.com,Disney+
 
+# Prime Video
+
+- DOMAIN,atv-ps.amazon.com,Proxy
+- DOMAIN,avodmp4s3ww-a.akamaihd.net,Proxy
+- DOMAIN,d1v5ir2lpwr8os.cloudfront.net,Proxy
+- DOMAIN,d22qjgkvxw22r6.cloudfront.net,Proxy
+- DOMAIN,d25xi40x97liuc.cloudfront.net,Proxy
+- DOMAIN,d27xxe7juh1us6.cloudfront.net,Proxy
+- DOMAIN,dmqdd6hw24ucf.cloudfront.net,Proxy
+- DOMAIN,fls-na.amazon.com,Proxy
+- DOMAIN,www.amazon.com,Proxy
+- DOMAIN-SUFFIX,aiv-cdn.net,Proxy
+- DOMAIN-SUFFIX,aiv-delivery.net,Proxy
+- DOMAIN-SUFFIX,amazonvideo.com,Proxy
+- DOMAIN-SUFFIX,media-amazon.com,Proxy
+- DOMAIN-SUFFIX,primevideo.com,Proxy
+- DOMAIN-SUFFIX,pv-cdn.net,Proxy
+- DOMAIN-KEYWORD,avoddashs,Proxy
+- DOMAIN-SUFFIX,llnwd.net,Proxy
+
 # Pandora
 
 - DOMAIN-SUFFIX,pandora.com,Proxy
@@ -582,16 +899,16 @@ rules:
 
 # Spotify
 
-- DOMAIN-KEYWORD,-spotify-com,Proxy
-- DOMAIN-KEYWORD,spotify.com,Proxy
-- DOMAIN-KEYWORD,spotify,Proxy
-- DOMAIN-SUFFIX,pscdn.co,Proxy
-- DOMAIN-SUFFIX,scdn.co,Proxy
-- DOMAIN-SUFFIX,spoti.fi,Proxy
-- DOMAIN-SUFFIX,spoti.fi,Proxy
-- DOMAIN-SUFFIX,spotify.com,Proxy
-- DOMAIN-SUFFIX,spotifycdn.com,Proxy
-- DOMAIN-SUFFIX,spotifycdn.net,Proxy
+- DOMAIN-KEYWORD,-spotify-com,Spotify
+- DOMAIN-KEYWORD,spotify.com,Spotify
+- DOMAIN-KEYWORD,spotify,Spotify
+- DOMAIN-SUFFIX,pscdn.co,Spotify
+- DOMAIN-SUFFIX,scdn.co,Spotify
+- DOMAIN-SUFFIX,spoti.fi,Spotify
+- DOMAIN-SUFFIX,spoti.fi,Spotify
+- DOMAIN-SUFFIX,spotify.com,Spotify
+- DOMAIN-SUFFIX,spotifycdn.com,Spotify
+- DOMAIN-SUFFIX,spotifycdn.net,Spotify
 
 # viuTV
 
@@ -605,13 +922,38 @@ rules:
 - DOMAIN-SUFFIX,gvt2.com,Proxy
 - DOMAIN-SUFFIX,youtu.be,Proxy
 
-# Porn
+# Porn TV
+# PornHub
+
+- DOMAIN-SUFFIX,pornhub.com,Proxy
+- DOMAIN-SUFFIX,etahub.com,REJECT
+- DOMAIN-SUFFIX,evtubescms.phncdn.com,REJECT
+
+# Jable.tv
+
+- DOMAIN-SUFFIX,jable.tv,Proxy
+- DOMAIN-SUFFIX,a.shukriya90.com,REJECT
+- DOMAIN-SUFFIX,a.shukriya90.com,REJECT
+- DOMAIN-SUFFIX,creative.xlviirdr.com,REJECT
+- DOMAIN-SUFFIX,realsrv.com,REJECT
+- DOMAIN-SUFFIX,asewlfjqwlflkew.com,REJECT
+- DOMAIN-SUFFIX,uus52.com,REJECT
+- DOMAIN-SUFFIX,uus58.com,REJECT
+- DOMAIN-SUFFIX,ddmax20.xyz,REJECT
+- DOMAIN-SUFFIX,ads.exosrv.com,REJECT
+- DOMAIN-KEYWORD,exosrv,REJECT
+- DOMAIN-KEYWORD,asewlfjqwlflkew,REJECT
+- DOMAIN-SUFFIX,tyrantdb.com,REJECT
+- DOMAIN-SUFFIX,adserve.work,REJECT
+
+# 91Porn
 
 - DOMAIN-SUFFIX,91porn.com,Proxy
-- DOMAIN-SUFFIX,pornhub.com,Proxy
+- DOMAIN-SUFFIX, killcovid2021.com,REJECT
+
+# Other
 - DOMAIN-SUFFIX,t66y.com,Proxy
 - DOMAIN-SUFFIX,kdw019.com,Proxy
-- DOMAIN-SUFFIX,jable.tv,Proxy
 
 # ChinaTV
 
@@ -653,64 +995,333 @@ rules:
     
 # China Area Network
 
+# MIJIA
+
+- DOMAIN-SUFFIX,api.io.mi.com,DIRECT
+
+# Ubuntu
+
+- DOMAIN-SUFFIX,ubuntu.com,DIRECT
+
+# Plex
+
+- DOMAIN-SUFFIX,provider.plex.tv,Proxy
+- DOMAIN-SUFFIX,pubsub.plex.tv,Proxy
+- DOMAIN-SUFFIX,images.plex.tv,Proxy
+- DOMAIN-SUFFIX,metadata-static.plex.tv,Proxy
+- DOMAIN-SUFFIX,plex.tv,DIRECT
+- DOMAIN-SUFFIX,me.plexapp.com,DIRECT
+- DOMAIN-SUFFIX,plex.direct,DIRECT
+
+# Charliemonroe Software
+
+- DOMAIN-SUFFIX,charliemonroe.net,DIRECT
+
 # Microsoft
 
 - DOMAIN-SUFFIX,microsoft.com,DIRECT
 - DOMAIN-SUFFIX,windows.net,DIRECT
 - DOMAIN-SUFFIX,sfx.ms,DIRECT
 - DOMAIN-SUFFIX,sharepoint.com,DIRECT
+- DOMAIN-SUFFIX,office.com,DIRECT
 - DOMAIN-KEYWORD,officecdn,DIRECT
 
 # Xbox
-# Xbox 走代理是因为游戏等内容容易消耗过多流量
+# Xbox 采取直连策略是因为游戏下载等容易消耗过多流量，后续所有与 Xbox（包括 Xbox for Windows）的相关规则均记录于此
 
 - DOMAIN-SUFFIX,xbox.com,DIRECT
 - DOMAIN-SUFFIX,xboxab.com,DIRECT
 - DOMAIN-SUFFIX,xboxab.net,DIRECT
 - DOMAIN-SUFFIX,xboxlive.com,DIRECT
+- DOMAIN-SUFFIX,xboxlive.cn,DIRECT
 - DOMAIN-SUFFIX,xboxservice.com,DIRECT
 - DOMAIN-SUFFIX,xboxservices.com,DIRECT
 - DOMAIN-SUFFIX,gamepass.com,DIRECT
-
-# Blizzard
-
-- DOMAIN-SUFFIX,blizzard.com,DIRECT
-- DOMAIN-SUFFIX,battle.net,DIRECT
-- DOMAIN,blzddist1-a.akamaihd.net,DIRECT
+- DOMAIN-SUFFIX,mojang.com,DIRECT
 
 # Steam
+# DIRECT 的规则默认为 Steam CN 或者不需要代理即可正常访问的域名
 
+- DOMAIN-SUFFIX,fanatical.com,Steam
+- DOMAIN-SUFFIX,humblebundle.com,Steam
+- DOMAIN-SUFFIX,underlords.com,Steam
+- DOMAIN-SUFFIX,valvesoftware.com,Steam
+- DOMAIN-SUFFIX,playartifact.com,Steam
+- DOMAIN-SUFFIX,steam-chat.com,Steam
+- DOMAIN-SUFFIX,steamcommunity.com,Steam
+- DOMAIN-SUFFIX,steamgames.com,Steam
+- DOMAIN-SUFFIX,steampowered.com,Steam
+- DOMAIN-SUFFIX,steamstat.us,Steam
+- DOMAIN,steambroadcast.akamaized.net,Steam
+- DOMAIN,steamcdn-a.akamaihd.net,Steam
+- DOMAIN,steamcommunity-a.akamaihd.net,Steam
+- DOMAIN,steamstore-a.akamaihd.net,Steam
+- DOMAIN,steamusercontent-a.akamaihd.net,Steam
+- DOMAIN,steamuserimages-a.akamaihd.net,Steam
+- DOMAIN,steampipe.akamaized.net,Steam
+- DOMAIN-SUFFIX,steamcontent.com,DIRECT
+- DOMAIN-SUFFIX,steamstatic.com,DIRECT
+- DOMAIN-SUFFIX,steamserver.net,DIRECT
+- DOMAIN-SUFFIX,test.steampowered.com,DIRECT
+- DOMAIN-SUFFIX,api.steampowered.com,DIRECT
+- DOMAIN-SUFFIX,rmbgame.net,DIRECT
+- DOMAIN-SUFFIX,steamusercontent.com,DIRECT
+- DOMAIN-SUFFIX,steamchina.com,DIRECT
 - DOMAIN,csgo.wmsj.cn,DIRECT
+- DOMAIN,dota2.wmsj.cn,DIRECT
+- DOMAIN,wmsjsteam.com,DIRECT
 - DOMAIN,dl.steam.clngaa.com,DIRECT
 - DOMAIN,dl.steam.ksyna.com,DIRECT
-- DOMAIN,dota2.wmsj.cn,DIRECT
 - DOMAIN,st.dl.bscstorage.net,DIRECT
 - DOMAIN,st.dl.eccdnx.com,DIRECT
 - DOMAIN,st.dl.pinyuncloud.com,DIRECT
 - DOMAIN,steampipe.steamcontent.tnkjmec.com,DIRECT
 - DOMAIN,steampowered.com.8686c.com,DIRECT
 - DOMAIN,steamstatic.com.8686c.com,DIRECT
-- DOMAIN,wmsjsteam.com,DIRECT
-- DOMAIN-SUFFIX,cm.steampowered.com,DIRECT
-- DOMAIN-SUFFIX,steamchina.com,DIRECT
-- DOMAIN-SUFFIX,steamcontent.com,DIRECT
-- DOMAIN-SUFFIX,steamusercontent.com,DIRECT
-- DOMAIN-SUFFIX,steampowered.com,DIRECT
-- DOMAIN-SUFFIX,steam-chat.com,DIRECT
-- DOMAIN-KEYWORD,steamcdn,DIRECT
-- DOMAIN-KEYWORD,steamstore,DIRECT
-- DOMAIN-KEYWORD,steamuserimages,DIRECT
-- DOMAIN-KEYWORD,steambroadcast,DIRECT
-- DOMAIN,media.steampowered.com,Proxy
-- DOMAIN,store.steampowered.com,Proxy
+
+# Epic Games
+
+- DOMAIN-KEYWORD,epicgames,DIRECT
+- DOMAIN-SUFFIX,epicgames.com,DIRECT
+- DOMAIN-SUFFIX,helpshift.com,DIRECT
+- DOMAIN-SUFFIX,paragon.com,DIRECT
+- DOMAIN-SUFFIX,unrealengine.com,DIRECT
+- PROCESS-NAME,EpicWebHelper.exe,DIRECT
+- DOMAIN-SUFFIX,battlebreakers.com,DIRECT
+- DOMAIN-SUFFIX,eac-cdn.com,DIRECT
+- DOMAIN-SUFFIX,easy.ac,DIRECT
+- DOMAIN-SUFFIX,easyanticheat.net,DIRECT
+- DOMAIN-SUFFIX,fortnite.com,DIRECT
+- DOMAIN-SUFFIX,playparagon.com,DIRECT
+- DOMAIN-SUFFIX,roborecall.com,DIRECT
+- DOMAIN-SUFFIX,shadowcomplex.com,DIRECT
+- DOMAIN-SUFFIX,spyjinx.com,DIRECT
+- DOMAIN-SUFFIX,unrealtournament.com,DIRECT
+- DOMAIN-SUFFIX,epicgames-download1.akamaized.net,DIRECT
+
+# Nintendo Switch
+
+- DOMAIN-KEYWORD,nintendo,DIRECT
+- DOMAIN-SUFFIX,nintendo.com,DIRECT
+- DOMAIN-SUFFIX,100classicbooks.com,DIRECT
+- DOMAIN-SUFFIX,ac-pocketcamp.com,DIRECT
+- DOMAIN-SUFFIX,amiibo.com,DIRECT
+- DOMAIN-SUFFIX,ayudanintendo.com,DIRECT
+- DOMAIN-SUFFIX,bowsersinsidestory.com,DIRECT
+- DOMAIN-SUFFIX,dialga.com,DIRECT
+- DOMAIN-SUFFIX,diddykongracing.com,DIRECT
+- DOMAIN-SUFFIX,dkr.com,DIRECT
+- DOMAIN-SUFFIX,donkeykongcountryreturns.com,DIRECT
+- DOMAIN-SUFFIX,drmario-world.com,DIRECT
+- DOMAIN-SUFFIX,excitebots.com,DIRECT
+- DOMAIN-SUFFIX,fire-emblem-heroes.com,DIRECT
+- DOMAIN-SUFFIX,fireemblemawakening.com,DIRECT
+- DOMAIN-SUFFIX,flipnotestudio.com,DIRECT
+- DOMAIN-SUFFIX,giratina.com,DIRECT
+- DOMAIN-SUFFIX,gloryofheracles.com,DIRECT
+- DOMAIN-SUFFIX,hackyourconsole.com,DIRECT
+- DOMAIN-SUFFIX,kirbysepicyarn.com,DIRECT
+- DOMAIN-SUFFIX,kirbysuperstarultra.com,DIRECT
+- DOMAIN-SUFFIX,kyurem.com,DIRECT
+- DOMAIN-SUFFIX,legendofzelda.cn,DIRECT
+- DOMAIN-SUFFIX,legendofzelda.com.cn,DIRECT
+- DOMAIN-SUFFIX,marioandluigidreamteam.com,DIRECT
+- DOMAIN-SUFFIX,mariobroswii.com,DIRECT
+- DOMAIN-SUFFIX,mariokart.cn,DIRECT
+- DOMAIN-SUFFIX,mariokart.com.cn,DIRECT
+- DOMAIN-SUFFIX,mariokart7.com,DIRECT
+- DOMAIN-SUFFIX,mariokart8.com,DIRECT
+- DOMAIN-SUFFIX,mariosupersluggers.com,DIRECT
+- DOMAIN-SUFFIX,miitomo.com,DIRECT
+- DOMAIN-SUFFIX,miitomo.com.cn,DIRECT
+- DOMAIN-SUFFIX,miiverse.com,DIRECT
+- DOMAIN-SUFFIX,nentindo.net,DIRECT
+- DOMAIN-SUFFIX,newsupermariobrosu.com,DIRECT
+- DOMAIN-SUFFIX,nintendo-europe-sales.com,DIRECT
+- DOMAIN-SUFFIX,nintendo-europe.com,DIRECT
+- DOMAIN-SUFFIX,nintendo.at,DIRECT
+- DOMAIN-SUFFIX,nintendo.be,DIRECT
+- DOMAIN-SUFFIX,nintendo.ch,DIRECT
+- DOMAIN-SUFFIX,nintendo.co.jp,DIRECT
+- DOMAIN-SUFFIX,nintendo.co.kr,DIRECT
+- DOMAIN-SUFFIX,nintendo.co.uk,DIRECT
+- DOMAIN-SUFFIX,nintendo.co.za,DIRECT
+- DOMAIN-SUFFIX,nintendo.com,DIRECT
+- DOMAIN-SUFFIX,nintendo.com.au,DIRECT
+- DOMAIN-SUFFIX,nintendo.com.hk,DIRECT
+- DOMAIN-SUFFIX,nintendo.com.pt,DIRECT
+- DOMAIN-SUFFIX,nintendo.de,DIRECT
+- DOMAIN-SUFFIX,nintendo.dk,DIRECT
+- DOMAIN-SUFFIX,nintendo.es,DIRECT
+- DOMAIN-SUFFIX,nintendo.eu,DIRECT
+- DOMAIN-SUFFIX,nintendo.fi,DIRECT
+- DOMAIN-SUFFIX,nintendo.fr,DIRECT
+- DOMAIN-SUFFIX,nintendo.it,DIRECT
+- DOMAIN-SUFFIX,nintendo.jp,DIRECT
+- DOMAIN-SUFFIX,nintendo.net,DIRECT
+- DOMAIN-SUFFIX,nintendo.nl,DIRECT
+- DOMAIN-SUFFIX,nintendo.no,DIRECT
+- DOMAIN-SUFFIX,nintendo.pt,DIRECT
+- DOMAIN-SUFFIX,nintendo.ru,DIRECT
+- DOMAIN-SUFFIX,nintendo.se,DIRECT
+- DOMAIN-SUFFIX,nintendo.tw,DIRECT
+- DOMAIN-SUFFIX,nintendo3ds.com,DIRECT
+- DOMAIN-SUFFIX,nintendodsi.com,DIRECT
+- DOMAIN-SUFFIX,nintendoeurope.com,DIRECT
+- DOMAIN-SUFFIX,nintendolabo.cn,DIRECT
+- DOMAIN-SUFFIX,nintendonetwork.net,DIRECT
+- DOMAIN-SUFFIX,nintendonyc.com,DIRECT
+- DOMAIN-SUFFIX,nintendostore.com,DIRECT
+- DOMAIN-SUFFIX,nintendoswitch.cn,DIRECT
+- DOMAIN-SUFFIX,nintendoswitch.com,DIRECT
+- DOMAIN-SUFFIX,nintendoswitch.com.cn,DIRECT
+- DOMAIN-SUFFIX,nintendoswitch.net,DIRECT
+- DOMAIN-SUFFIX,nintendoswitchtogether.com,DIRECT
+- DOMAIN-SUFFIX,nintendowifi.net,DIRECT
+- DOMAIN-SUFFIX,nintendowii.com,DIRECT
+- DOMAIN-SUFFIX,personaltrainermath.com,DIRECT
+- DOMAIN-SUFFIX,playnintendo.com,DIRECT
+- DOMAIN-SUFFIX,pokedex3d.com,DIRECT
+- DOMAIN-SUFFIX,pokemon-moon.com,DIRECT
+- DOMAIN-SUFFIX,pokemon-sun.com,DIRECT
+- DOMAIN-SUFFIX,pokemon-sunmoon.com,DIRECT
+- DOMAIN-SUFFIX,pokemon.com,DIRECT
+- DOMAIN-SUFFIX,pokemonbank.com,DIRECT
+- DOMAIN-SUFFIX,pokemonblackwhite.com,DIRECT
+- DOMAIN-SUFFIX,pokemonbw.com,DIRECT
+- DOMAIN-SUFFIX,pokemonchampionships.com,DIRECT
+- DOMAIN-SUFFIX,pokemongoldsilver.com,DIRECT
+- DOMAIN-SUFFIX,pokemonhome.com,DIRECT
+- DOMAIN-SUFFIX,pokemonletsgoeevee.com,DIRECT
+- DOMAIN-SUFFIX,pokemonletsgopikachu.com,DIRECT
+- DOMAIN-SUFFIX,pokemonmysterydungeon.com,DIRECT
+- DOMAIN-SUFFIX,pokemonpicross.com,DIRECT
+- DOMAIN-SUFFIX,pokemonplatinum.com,DIRECT
+- DOMAIN-SUFFIX,pokemonrubysapphire.com,DIRECT
+- DOMAIN-SUFFIX,pokemonsunmoon.com,DIRECT
+- DOMAIN-SUFFIX,pokemonswordshield.com,DIRECT
+- DOMAIN-SUFFIX,pokemonultrasunmoon.com,DIRECT
+- DOMAIN-SUFFIX,pokemonvgc.com,DIRECT
+- DOMAIN-SUFFIX,pokemonwifi.net,DIRECT
+- DOMAIN-SUFFIX,splatoon2tournament.com,DIRECT
+- DOMAIN-SUFFIX,starfox.com,DIRECT
+- DOMAIN-SUFFIX,supermario.com,DIRECT
+- DOMAIN-SUFFIX,supermario3dworld.com,DIRECT
+- DOMAIN-SUFFIX,supermariobros.com.cn,DIRECT
+- DOMAIN-SUFFIX,supermariogalaxy.com,DIRECT
+- DOMAIN-SUFFIX,supermariorun.com,DIRECT
+- DOMAIN-SUFFIX,superpapermario.com,DIRECT
+- DOMAIN-SUFFIX,supersmashbros.cn,DIRECT
+- DOMAIN-SUFFIX,supersmashbros.com.cn,DIRECT
+- DOMAIN-SUFFIX,thelegendarystarfy.com,DIRECT
+- DOMAIN-SUFFIX,thewonderful101.com,DIRECT
+- DOMAIN-SUFFIX,wariolandshakeit.com,DIRECT
+- DOMAIN-SUFFIX,wariowarediy.com,DIRECT
+- DOMAIN-SUFFIX,wii-u.com,DIRECT
+- DOMAIN-SUFFIX,wiifit.com,DIRECT
+- DOMAIN-SUFFIX,wiifitu.com,DIRECT
+- DOMAIN-SUFFIX,wiipartyu.com,DIRECT
+- DOMAIN-SUFFIX,wiisports.com,DIRECT
+- DOMAIN-SUFFIX,wiisportsresort.com,DIRECT
+- DOMAIN-SUFFIX,wiiugamepad.com,DIRECT
+- DOMAIN-SUFFIX,wiivc.net,DIRECT
+- DOMAIN-SUFFIX,xenoblade.com,DIRECT
+- DOMAIN-SUFFIX,xn--mts47c3w9b1qr.cn,DIRECT
+- DOMAIN-SUFFIX,xn--mts47c3w9b1qr.net,DIRECT
+- DOMAIN-SUFFIX,yoshisnewisland.com,DIRECT
+- IP-CIDR,35.192.0.0/12,DIRECT
+
+# Origin & EA
+
+- DOMAIN-SUFFIX,origin.com,DIRECT
+- DOMAIN-SUFFIX,origin-a.akamaihd.net,DIRECT
+- DOMAIN-SUFFIX,eaassets-a.akamaihd.net,DIRECT
+- DOMAIN-SUFFIX,ea.com,DIRECT
+
+# GOG Galaxy
+
+- DOMAIN-SUFFIX,gog-cdn-fastly.gog.com,DIRECT
+- DOMAIN-SUFFIX,gog-statics.com,DIRECT
+- DOMAIN-SUFFIX,footprint.net,DIRECT
+
+# Blizzard
+
+- DOMAIN-SUFFIX,blizzard.com,Proxy
+- DOMAIN-SUFFIX,battlenet.com,Proxy
+- DOMAIN-SUFFIX,battle.net,Proxy
+- DOMAIN,blzddist1-a.akamaihd.net,Proxy
+
+# Supercell
+
+- DOMAIN-SUFFIX,brawlstars.com,DIRECT
+- DOMAIN-SUFFIX,brawlstarsgame.com,DIRECT
+- DOMAIN-SUFFIX,supercell.com,DIRECT
+- DOMAIN-SUFFIX,clashroyaleapp.com,DIRECT
+- DOMAIN-SUFFIX,clashroyale.com,DIRECT
+- DOMAIN-SUFFIX,haydaygame.com,DIRECT
+- DOMAIN-SUFFIX,clashofclans.com,DIRECT
+- DOMAIN-SUFFIX,boombeachgame.com,DIRECT
+- IP-CIDR,13.210.25.233/32,DIRECT
+- IP-CIDR,13.212.170.102/32,DIRECT
+- IP-CIDR,13.212.171.212/32,DIRECT
+- IP-CIDR,15.161.130.86/32,DIRECT
+- IP-CIDR,15.254.1.17/32,DIRECT
+- IP-CIDR,162.62.33.45/32,DIRECT
+- IP-CIDR,162.62.33.70/32,DIRECT
+- IP-CIDR,162.62.34.10/32,DIRECT
+- IP-CIDR,18.141.176.65/32,DIRECT
+- IP-CIDR,18.156.137.147/32,DIRECT
+- IP-CIDR,18.231.148.103/32,DIRECT
+- IP-CIDR,3.1.80.68/32,DIRECT
+- IP-CIDR,3.25.190.152/32,DIRECT
+- IP-CIDR,3.82.147.36/32,DIRECT
+- IP-CIDR,34.220.160.16/32,DIRECT
+- IP-CIDR,35.154.64.7/32,DIRECT
+- IP-CIDR,35.72.32.125/32,DIRECT
+- IP-CIDR,52.13.150.128/32,DIRECT
+- IP-CIDR,52.13.42.120/32,DIRECT
+- IP-CIDR,52.50.131.212/32,DIRECT
+- IP-CIDR,54.207.168.84/32,DIRECT
+- IP-CIDR,54.248.64.192/32,DIRECT
 
 # Tencent
 
-#USER-AGENT,MicroMessenger%20Client,DIRECT
-#USER-AGENT,WeChat*,DIRECT
 - DOMAIN-SUFFIX,qq.com,DIRECT
 - DOMAIN-SUFFIX,qpic.cn,DIRECT
 - DOMAIN-SUFFIX,tencent.com,DIRECT
+
+# WeChat
+
+- DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net,DIRECT
+- DOMAIN,btrace.qq.com,DIRECT
+- DOMAIN,dldir1.qq.com,DIRECT
+- DOMAIN,slife.xy-asia.com,DIRECT
+- DOMAIN,soup.v.qq.com,DIRECT
+- DOMAIN,vweixinf.tc.qq.com,DIRECT
+- DOMAIN,weixin110.qq.com,DIRECT
+- DOMAIN,wup.imtt.qq.com,DIRECT
+- DOMAIN-SUFFIX,iot-tencent.com,DIRECT
+- DOMAIN-SUFFIX,lbs.gtimg.com,DIRECT
+- DOMAIN-SUFFIX,map.qq.com,DIRECT
+- DOMAIN-SUFFIX,qlogo.cn,DIRECT
+- DOMAIN-SUFFIX,qpic.cn,DIRECT
+- DOMAIN-SUFFIX,servicewechat.com,DIRECT
+- DOMAIN-SUFFIX,tenpay.com,DIRECT
+- DOMAIN-SUFFIX,up-hl.3g.qq.com,DIRECT
+- DOMAIN-SUFFIX,vweixinthumb.tc.qq.com,DIRECT
+- DOMAIN-SUFFIX,wechat.com,DIRECT
+- DOMAIN-SUFFIX,wechatlegal.net,DIRECT
+- DOMAIN-SUFFIX,wechatos.net,DIRECT
+- DOMAIN-SUFFIX,wechatpay.com,DIRECT
+- DOMAIN-SUFFIX,weixin.com,DIRECT
+- DOMAIN-SUFFIX,weixin.qq.com,DIRECT
+- DOMAIN-SUFFIX,weixinbridge.com,DIRECT
+- DOMAIN-SUFFIX,weixinsxy.com,DIRECT
+- DOMAIN-SUFFIX,wx.gtimg.com,DIRECT
+- DOMAIN-SUFFIX,wx.qq.com,DIRECT
+- DOMAIN-SUFFIX,wxapp.tc.qq.com,DIRECT
+- DOMAIN-SUFFIX,wxs.qq.com,DIRECT
+- DOMAIN-SUFFIX,yun-hl.3g.qq.com,DIRECT
 
 # Alibaba
 
@@ -823,11 +1434,11 @@ rules:
 
 # Akamai
 
-# - DOMAIN-SUFFIX,akamai.net,DIRECT
-# - DOMAIN-SUFFIX,akamaiedge.net,DIRECT
-# - DOMAIN-SUFFIX,akamaihd.net,DIRECT
-# - DOMAIN-SUFFIX,akamaistream.net,DIRECT
-# - DOMAIN-SUFFIX,akamaized.net,DIRECT
+- DOMAIN-SUFFIX,akamai.net,DIRECT
+- DOMAIN-SUFFIX,akamaiedge.net,DIRECT
+- DOMAIN-SUFFIX,akamaihd.net,DIRECT
+- DOMAIN-SUFFIX,akamaistream.net,DIRECT
+- DOMAIN-SUFFIX,akamaized.net,DIRECT
 
 # ChinaNetCenter
 
@@ -841,6 +1452,7 @@ rules:
 - DOMAIN-SUFFIX,ip-cdn.com,DIRECT
 - DOMAIN-SUFFIX,ipv6-test.com,DIRECT
 - DOMAIN-SUFFIX,test-ipv6.com,DIRECT
+- DOMAIN-KEYWORD,ipv6,DIRECT
 - DOMAIN-SUFFIX,whatismyip.com,DIRECT
 - DOMAIN,ip.bjango.com,DIRECT
 
@@ -1112,7 +1724,6 @@ rules:
 - DOMAIN-SUFFIX,slideshare.net,Proxy
 - DOMAIN-SUFFIX,soundcloud.com,Proxy
 - DOMAIN-SUFFIX,startpage.com,Proxy
-- DOMAIN-SUFFIX,steamcommunity.com,Proxy
 - DOMAIN-SUFFIX,steemit.com,Proxy
 - DOMAIN-SUFFIX,t66y.com,Proxy
 - DOMAIN-SUFFIX,teco-hk.org,Proxy
@@ -1269,296 +1880,6 @@ rules:
 - DOMAIN-SUFFIX,youtu.be,Proxy
 - DOMAIN-SUFFIX,yt.be,Proxy
 - DOMAIN-SUFFIX,ytimg.com,Proxy
-
-# Other
-
-- DOMAIN-SUFFIX,0rz.tw,Proxy
-- DOMAIN-SUFFIX,4bluestones.biz,Proxy
-- DOMAIN-SUFFIX,9bis.net,Proxy
-- DOMAIN-SUFFIX,allconnected.co,Proxy
-- DOMAIN-KEYWORD,amazon,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,google,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,gmail,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,youtube,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,facebook,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,fb.me,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,fbcdn.net,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,twitter,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,instagram,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,dropbox,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,twimg.com,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,blogspot,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,youtu.be,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,whatsapp,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,9to5mac.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,abpchina.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,adblockplus.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,adobe.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,akamaized.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,alfredapp.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,amplitude.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ampproject.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,android.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,angularjs.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,aolcdn.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,apkpure.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,appledaily.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,appshopper.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,appspot.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,arcgis.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,archive.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,armorgames.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,aspnetcdn.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,att.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,awsstatic.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,azureedge.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,azurewebsites.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,bing.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,bintray.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,bit.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,bit.ly,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,bitbucket.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,bjango.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,bkrtx.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,blog.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,blogcdn.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,blogger.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,blogsmithmedia.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,blogspot.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,blogspot.hk,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,bloomberg.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,box.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,box.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,cachefly.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,chromium.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,cl.ly,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,cloudflare.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,cloudfront.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,cloudmagic.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,cmail19.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,cnet.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,cocoapods.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,comodoca.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,crashlytics.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,culturedcode.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,d.pr,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,danilo.to,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,dayone.me,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,db.tt,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,deskconnect.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,disq.us,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,disqus.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,disquscdn.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,dnsimple.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,docker.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,dribbble.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,droplr.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,duckduckgo.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,dueapp.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,dytt8.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,edgecastcdn.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,edgekey.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,edgesuite.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,engadget.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,entrust.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,eurekavpt.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,evernote.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,fabric.io,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,fast.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,fastly.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,fc2.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,feedburner.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,feedly.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,feedsportal.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,fiftythree.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,firebaseio.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,flexibits.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,flickr.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,flipboard.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,g.co,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,gabia.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,geni.us,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,gfx.ms,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ggpht.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ghostnoteapp.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,git.io,Proxy,force-remote-dns
-- DOMAIN-KEYWORD,github,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,globalsign.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,gmodules.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,godaddy.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,golang.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,gongm.in,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,goo.gl,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,goodreaders.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,goodreads.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,gravatar.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,gstatic.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,gvt0.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,hockeyapp.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,hotmail.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,icons8.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ifixit.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ift.tt,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ifttt.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,iherb.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,imageshack.us,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,img.ly,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,imgur.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,imore.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,instapaper.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ipn.li,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,is.gd,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,issuu.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,itgonglun.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,itun.es,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ixquick.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,j.mp,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,js.revsci.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,jshint.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,jtvnw.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,justgetflux.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,kat.cr,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,klip.me,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,libsyn.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,linkedin.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,linode.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,lithium.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,littlehj.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,live.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,live.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,livefilestore.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,llnwd.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,macid.co,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,macromedia.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,macrumors.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,mashable.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,mathjax.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,medium.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,mega.co.nz,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,mega.nz,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,megaupload.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,microsofttranslator.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,mindnode.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,mobile01.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,modmyi.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,msedge.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,myfontastic.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,name.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,nextmedia.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,nsstatic.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,nssurge.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,nyt.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,nytimes.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,omnigroup.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,onedrive.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,onenote.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ooyala.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,openvpn.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,openwrt.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,orkut.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,osxdaily.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,outlook.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ow.ly,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,paddleapi.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,parallels.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,parse.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,pdfexpert.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,periscope.tv,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,pinboard.in,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,pinterest.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,pixelmator.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,pixiv.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,playpcesor.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,playstation.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,playstation.com.hk,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,playstation.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,playstationnetwork.com,Proxy,force-remote-dn
-- DOMAIN-SUFFIX,pushwoosh.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,rime.im,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,servebom.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,sfx.ms,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,shadowsocks.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,sharethis.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,shazam.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,skype.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,smartdnsProxy.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,smartmailcloud.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,sndcdn.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,sony.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,soundcloud.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,sourceforge.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,spotify.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,squarespace.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,sstatic.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,st.luluku.pw,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,stackoverflow.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,startpage.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,staticflickr.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,steamcommunity.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,symauth.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,symcb.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,symcd.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tapbots.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tapbots.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tdesktop.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,techcrunch.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,techsmith.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,thepiratebay.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,theverge.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,time.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,timeinc.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tiny.cc,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tinypic.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tmblr.co,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,todoist.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,trello.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,trustasiassl.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tumblr.co,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tumblr.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tweetdeck.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,tweetmarker.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,twitch.tv,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,txmblr.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,typekit.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ubertags.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ublock.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ubnt.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ulyssesapp.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,urchin.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,usertrust.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,v.gd,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,v2ex.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,vimeo.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,vimeocdn.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,vine.co,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,vivaldi.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,vox-cdn.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,vsco.co,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,vultr.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,w.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,w3schools.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,webtype.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wikiwand.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wikileaks.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wikimedia.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wikipedia.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wikipedia.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,windows.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,windows.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wire.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wordpress.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,workflowy.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wp.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wsj.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,wsj.net,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,xda-developers.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,xeeno.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,xiti.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,yahoo.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,yimg.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ying.com,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,yoyo.org,Proxy,force-remote-dns
-- DOMAIN-SUFFIX,ytimg.com,Proxy,force-remote-dns
 
 # IQIYI
 - IP-CIDR,101.227.0.0/16,DIRECT
