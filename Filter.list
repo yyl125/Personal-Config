@@ -138,7 +138,7 @@ HOST-SUFFIX,goodsync.com,DIRECT
 HOST,voice.telephony.goog,Google Voice
 IP-CIDR,74.125.39.0/24,Google Voice
 
-# OpenAI & ChatGPT
+# OpenAI & ChatGPT & ChatGPT Voice
 
 HOST-SUFFIX,openai.com,AIGC
 HOST-KEYWORD,openai,AIGC
@@ -187,46 +187,26 @@ IP6-CIDR,2401:c080:1000:47c5:5400:4ff:feab:f724/128,AIGC
 HOST-SUFFIX,claude.ai,AIGC
 HOST-SUFFIX,anthropic.com,AIGC
 
-# Google Gemini
+# Google Gemini & Google Generative Language API & Google AI Studio & Google NotebookLM
 
 HOST-SUFFIX,gemini.google.com,AIGC
 HOST-SUFFIX,proactivebackend-pa.googleapis.com,AIGC
 HOST,ai.google.dev,AIGC
 HOST,alkalimakersuite-pa.clients6.google.com,AIGC
 HOST,makersuite.google.com,AIGC
+HOST-SUFFIX,makersuite.google.com,AIGC
 HOST-SUFFIX,bard.google.com,AIGC
 HOST-SUFFIX,deepmind.com,AIGC
 HOST-SUFFIX,deepmind.google,AIGC
-HOST-SUFFIX,gemini.google.com,AIGC
 HOST-SUFFIX,generativeai.google,AIGC
-HOST-SUFFIX,proactivebackend-pa.googleapis.com,AIGC
 HOST-SUFFIX,apis.google.com,AIGC
 HOST-KEYWORD,colab,AIGC
 HOST-KEYWORD,developerprofiles,AIGC
 HOST-KEYWORD,generativelanguage,AIGC
-
-# Google DeepMind
-
-HOST-SUFFIX,deepmind.com,AIGC
-HOST-SUFFIX,deepmind.google,AIGC
-
-# Google Generative Language API
-
 HOST-SUFFIX,generativelanguage.googleapis.com,AIGC
 HOST-SUFFIX,geller-pa.googleapis.com,AIGC
-HOST-SUFFIX,proactivebackend-pa.googleapis.com,AIGC
-
-# Google AI Studio
-
-HOST,ai.google.dev,AIGC
 HOST-SUFFIX,aistudio.google.com,AIGC
-HOST-SUFFIX,makersuite.google.com,AIGC
 HOST,alkalicore-pa.clients6.google.com,AIGC
-HOST,alkalimakersuite-pa.clients6.google.com,AIGC
-HOST-SUFFIX,generativeai.google,AIGC
-
-# Google NotebookLM
-
 HOST-SUFFIX,notebooklm.google,AIGC
 HOST-SUFFIX,notebooklm.google.com,AIGC
 
@@ -237,6 +217,42 @@ HOST,gateway.ai.cloudflare.com,AIGC
 # GitHub Copilot
 
 HOST,api.github.com,AIGC
+
+# Microsoft Copilot
+
+HOST,api.msn.com,AIGC
+HOST,api.statsig.com,AIGC
+HOST,assets.msn.com,AIGC
+HOST,browser-intake-datadoghq.com,AIGC
+HOST,copilot.microsoft.com,AIGC
+HOST,gateway.bingviz.microsoft.net,AIGC
+HOST,gateway.bingviz.microsoftapp.net,AIGC
+HOST,in.appcenter.ms,AIGC
+HOST,location.microsoft.com,AIGC
+HOST,odc.officeapps.live.com,AIGC
+HOST,openai-api.arkoselabs.com,AIGC
+HOST,r.bing.com,AIGC
+HOST,self.events.data.microsoft.com,AIGC
+HOST,services.bingapis.com,AIGC
+HOST,static.cloudflareinsights.com,AIGC
+HOST,sydney.bing.com,AIGC
+HOST,www.bing.com,AIGC
+HOST-SUFFIX,algolia.net,AIGC
+HOST-SUFFIX,api.microsoftapp.net,AIGC
+HOST-SUFFIX,auth0.com,AIGC
+HOST-SUFFIX,bing-shopping.microsoft-falcon.io,AIGC
+HOST-SUFFIX,client-api.arkoselabs.com,AIGC
+HOST-SUFFIX,edgeservices.bing.com,AIGC
+HOST-SUFFIX,events.statsigapi.net,AIGC
+HOST-SUFFIX,featuregates.org,AIGC
+HOST-SUFFIX,intercom.io,AIGC
+HOST-SUFFIX,intercomcdn.com,AIGC
+HOST-SUFFIX,launchdarkly.com,AIGC
+HOST-SUFFIX,observeit.net,AIGC
+HOST-SUFFIX,segment.io,AIGC
+HOST-SUFFIX,stripe.com,AIGC
+IP-CIDR,24.199.123.28/32,AIGC
+IP-CIDR,64.23.132.171/32,AIGC
 
 # MoonFM
 
