@@ -461,46 +461,26 @@ rules:
 - DOMAIN-SUFFIX,claude.ai,AIGC
 - DOMAIN-SUFFIX,anthropic.com,AIGC
 
-# Google Gemini
+# Google Gemini & Google Generative Language API & Google AI Studio & Google NotebookLM
 
 - DOMAIN-SUFFIX,gemini.google.com,AIGC
 - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,AIGC
 - DOMAIN,ai.google.dev,AIGC
 - DOMAIN,alkalimakersuite-pa.clients6.google.com,AIGC
 - DOMAIN,makersuite.google.com,AIGC
+- DOMAIN-SUFFIX,makersuite.google.com,AIGC
 - DOMAIN-SUFFIX,bard.google.com,AIGC
 - DOMAIN-SUFFIX,deepmind.com,AIGC
 - DOMAIN-SUFFIX,deepmind.google,AIGC
-- DOMAIN-SUFFIX,gemini.google.com,AIGC
 - DOMAIN-SUFFIX,generativeai.google,AIGC
-- DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,AIGC
 - DOMAIN-SUFFIX,apis.google.com,AIGC
 - DOMAIN-KEYWORD,colab,AIGC
 - DOMAIN-KEYWORD,developerprofiles,AIGC
 - DOMAIN-KEYWORD,generativelanguage,AIGC
-
-# Google DeepMind
-
-- DOMAIN-SUFFIX,deepmind.com,AIGC
-- DOMAIN-SUFFIX,deepmind.google,AIGC
-
-# Google Generative Language API
-
 - DOMAIN-SUFFIX,generativelanguage.googleapis.com,AIGC
 - DOMAIN-SUFFIX,geller-pa.googleapis.com,AIGC
-- DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,AIGC
-
-# Google AI Studio
-
-- DOMAIN,ai.google.dev,AIGC
 - DOMAIN-SUFFIX,aistudio.google.com,AIGC
-- DOMAIN-SUFFIX,makersuite.google.com,AIGC
 - DOMAIN,alkalicore-pa.clients6.google.com,AIGC
-- DOMAIN,alkalimakersuite-pa.clients6.google.com,AIGC
-- DOMAIN-SUFFIX,generativeai.google,AIGC
-
-# Google NotebookLM
-
 - DOMAIN-SUFFIX,notebooklm.google,AIGC
 - DOMAIN-SUFFIX,notebooklm.google.com,AIGC
 
@@ -511,6 +491,42 @@ rules:
 # GitHub Copilot
 
 - DOMAIN,api.github.com,AIGC
+
+# Microsoft Copilot
+
+- DOMAIN,api.msn.com,AIGC
+- DOMAIN,api.statsig.com,AIGC
+- DOMAIN,assets.msn.com,AIGC
+- DOMAIN,browser-intake-datadoghq.com,AIGC
+- DOMAIN,copilot.microsoft.com,AIGC
+- DOMAIN,gateway.bingviz.microsoft.net,AIGC
+- DOMAIN,gateway.bingviz.microsoftapp.net,AIGC
+- DOMAIN,in.appcenter.ms,AIGC
+- DOMAIN,location.microsoft.com,AIGC
+- DOMAIN,odc.officeapps.live.com,AIGC
+- DOMAIN,openai-api.arkoselabs.com,AIGC
+- DOMAIN,r.bing.com,AIGC
+- DOMAIN,self.events.data.microsoft.com,AIGC
+- DOMAIN,services.bingapis.com,AIGC
+- DOMAIN,static.cloudflareinsights.com,AIGC
+- DOMAIN,sydney.bing.com,AIGC
+- DOMAIN,www.bing.com,AIGC
+- DOMAIN-SUFFIX,algolia.net,AIGC
+- DOMAIN-SUFFIX,api.microsoftapp.net,AIGC
+- DOMAIN-SUFFIX,auth0.com,AIGC
+- DOMAIN-SUFFIX,bing-shopping.microsoft-falcon.io,AIGC
+- DOMAIN-SUFFIX,client-api.arkoselabs.com,AIGC
+- DOMAIN-SUFFIX,edgeservices.bing.com,AIGC
+- DOMAIN-SUFFIX,events.statsigapi.net,AIGC
+- DOMAIN-SUFFIX,featuregates.org,AIGC
+- DOMAIN-SUFFIX,intercom.io,AIGC
+- DOMAIN-SUFFIX,intercomcdn.com,AIGC
+- DOMAIN-SUFFIX,launchdarkly.com,AIGC
+- DOMAIN-SUFFIX,observeit.net,AIGC
+- DOMAIN-SUFFIX,segment.io,AIGC
+- DOMAIN-SUFFIX,stripe.com,AIGC
+- IP-CIDR,24.199.123.28/32,AIGC
+- IP-CIDR,64.23.132.171/32,AIGC
 
 # MoonFM
 
